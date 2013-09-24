@@ -1,6 +1,5 @@
 module Helpers
   module Ast
-    include Alf::Sql::Utils
 
     def sexpr(arg)
       Alf::Sql::Grammar.sexpr(arg)
@@ -199,6 +198,15 @@ module Helpers
       name = qualified_name("t1", name) unless name.is_a?(Array)
       sexpr [:order_by_term, name, direction]
     end
+
+    def distinct
+      [:set_quantifier, "distinct"]
+    end
+
+    def all
+      [:set_quantifier, "all"]
+    end
+    alias :not_distinct :all
 
   end
   include Ast

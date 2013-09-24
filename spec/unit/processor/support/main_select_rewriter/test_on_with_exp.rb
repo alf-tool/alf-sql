@@ -15,7 +15,7 @@ module Alf
         subject{ MainSelectRewriterTest.new.on_with_exp(expr) }
 
         let(:expr){
-          [:with_exp, with_spec, select_all_ab]
+          Grammar.sexpr [:with_exp, with_spec, select_all_ab]
         }
 
         let(:expected){

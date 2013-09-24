@@ -5,7 +5,6 @@ module Alf
   end
 end
 require_relative 'sql/grammar'
-require_relative 'sql/utils'
 require_relative 'sql/processor'
 require_relative 'sql/cog'
 require_relative 'sql/builder'

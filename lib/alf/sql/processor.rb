@@ -1,3 +1,9 @@
+module Alf
+  module Sql
+    module Processor
+    end
+  end
+end
 require_relative 'processor/support/main_select_rewriter'
 require_relative 'processor/support/select_list_rewriter'
 require_relative 'processor/distinct'
