@@ -5,7 +5,7 @@ module Alf
 
       def qualifier_proc
         ->(a){
-          item = sexpr_body.find{|item| item.as_name == a }
+          item = sexpr_body.find{|item| item.as_name.to_s == a.to_s }
           item && item.qualifier
         }
       end

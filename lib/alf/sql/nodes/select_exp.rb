@@ -27,6 +27,10 @@ module Alf
         self[2]
       end
 
+      def where_clause
+        find_child(:where_clause)
+      end
+
       def order_by_clause
         find_child(:order_by_clause)
       end

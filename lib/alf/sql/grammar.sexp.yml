@@ -31,7 +31,7 @@ rules:
   natural_join:
     - [ table_spec, table_spec ]
   join_on:
-    - [ table_spec, table_spec, bool_exp ]
+    - [ table_spec, table_spec, predicate ]
   join_using:
     - [ table_spec, table_spec, using ]
   using:
@@ -53,7 +53,7 @@ rules:
   from_clause:
     - [ table_spec+ ]
   where_clause:
-    - [ bool_exp ]
+    - [ predicate ]
   order_by_clause:
     - [ order_by_term+ ]
   order_by_term:
@@ -67,8 +67,6 @@ rules:
     - join_exp
   table_as:
     - [ table_name, range_var_name ]
-  bool_exp:
-    - "::Alf::Predicate"
   scalar_exp:
     - qualified_name
     - column_name

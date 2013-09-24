@@ -1,3 +1,5 @@
+require_relative 'predicate/nodes'
+
 require_relative 'sql/version'
 require_relative 'sql/loader'
 module Alf

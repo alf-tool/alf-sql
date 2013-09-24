@@ -77,11 +77,11 @@ module Alf
         rewrite(compiled, expr, Processor::Rename, [expr.renaming])
       end
 
-      def on_restrict(expr)
-        # -> SQL's WHERE
+      def on_restrict(expr, compiled)
+        rewrite(compiled, expr, Processor::Where, [expr.predicate])
       end
 
-      def on_summarize(expr)
+      def on_summarize(expr, compiled)
         # -> SQL's GROUP-BY
       end
 
