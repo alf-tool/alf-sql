@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Merge, "on_with_exp" do
 
         subject{ Merge.new(:intersect, right, builder(1)).on_with_exp(expr) }

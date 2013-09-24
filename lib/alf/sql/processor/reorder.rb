@@ -1,10 +1,11 @@
 module Alf
   module Sql
-    module Processor
-      class Reorder < SelectListRewriter
+    class Processor
+      class Reorder < Processor
         grammar Sql::Grammar
 
-        def initialize(attr_list, builder = nil)
+        def initialize(attr_list, builder = Builder.new)
+          super(builder)
           @indexes = Hash[attr_list.to_a.map(&:to_s).each_with_index.to_a]
         end
 
@@ -16,6 +17,6 @@ module Alf
         end
 
       end # class Reorder
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf

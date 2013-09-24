@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Rename, "on_select_item" do
 
         subject{ Rename.new(Renaming[a: :x]).on_select_item(expr) }

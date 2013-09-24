@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe FromSelf, "on_nonjoin_exp" do
 
         subject{ FromSelf.new(builder).on_nonjoin_exp(expr) }

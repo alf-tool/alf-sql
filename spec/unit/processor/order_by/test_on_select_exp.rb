@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe OrderBy, "on_select_exp" do
 
         subject{ OrderBy.new(ordering, builder).on_select_exp(expr) }

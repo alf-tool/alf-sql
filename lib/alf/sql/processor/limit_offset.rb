@@ -1,15 +1,15 @@
 module Alf
   module Sql
-    module Processor
-      class LimitOffset < MainSelectRewriter
+    class Processor
+      class LimitOffset < Processor
         grammar Sql::Grammar
 
         def initialize(limit, offset, builder = Builder.new)
+          super(builder)
           @limit = limit
           @offset = offset
-          @builder = builder
         end
-        attr_reader :limit, :offset, :builder
+        attr_reader :limit, :offset
 
         def on_union(sexpr)
         end
@@ -28,6 +28,6 @@ module Alf
         end
 
       end # class LimitOffset
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf

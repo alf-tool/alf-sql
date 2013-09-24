@@ -1,11 +1,11 @@
 module Alf
   module Sql
-    module Processor
-      class Clip < SelectListRewriter
+    class Processor
+      class Clip < Processor
         grammar Sql::Grammar
 
-        def initialize(attributes, builder = nil)
-          super()
+        def initialize(attributes, builder = Builder.new)
+          super(builder)
           @attributes = attributes
         end
 
@@ -17,6 +17,6 @@ module Alf
         end
 
       end # class Clip
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf

@@ -1,13 +1,8 @@
 module Alf
   module Sql
-    module Processor
-      class FromSelf < Sexpr::Rewriter
+    class Processor
+      class FromSelf < Processor
         grammar Sql::Grammar
-
-        def initialize(builder = Builder.new)
-          @builder = builder
-        end
-        attr_reader :builder
 
         def on_with_exp(sexpr)
           q = builder.next_qualifier!
@@ -30,6 +25,6 @@ module Alf
         alias :on_select_exp :on_nonjoin_exp
 
       end # class FromSelf
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf

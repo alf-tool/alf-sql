@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe FromSelf, "on_with_exp" do
 
         subject{ FromSelf.new(builder(1)).on_with_exp(expr) }

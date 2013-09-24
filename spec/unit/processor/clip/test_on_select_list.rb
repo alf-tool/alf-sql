@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Clip, "on_select_list" do
 
         subject{ Clip.new(AttrList[:a]).on_select_list(expr) }

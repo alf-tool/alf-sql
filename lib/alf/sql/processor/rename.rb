@@ -1,10 +1,11 @@
 module Alf
   module Sql
-    module Processor
-      class Rename < SelectListRewriter
+    class Processor
+      class Rename < Processor
         grammar Sql::Grammar
 
-        def initialize(renaming, builder = nil)
+        def initialize(renaming, builder = Builder.new)
+          super(builder)
           @renaming = renaming
         end
 
@@ -16,6 +17,6 @@ module Alf
         end
 
       end # class Rename
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf

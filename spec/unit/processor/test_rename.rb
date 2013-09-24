@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Rename do
 
         subject{ Rename.new(Renaming[a: :b]).call(expr) }

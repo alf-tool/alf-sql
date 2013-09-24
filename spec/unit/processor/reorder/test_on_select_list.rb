@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Reorder, "on_select_list" do
 
         subject{ Reorder.new([:b, :a]).on_select_list(expr) }

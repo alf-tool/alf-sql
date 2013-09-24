@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Distinct do
 
         subject{ Distinct.new.call(expr) }

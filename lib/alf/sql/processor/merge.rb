@@ -1,13 +1,13 @@
 module Alf
   module Sql
-    module Processor
-      class Merge < Sexpr::Rewriter
+    class Processor
+      class Merge < Processor
         grammar Sql::Grammar
 
-        def initialize(kind, right, builder = nil)
-          @kind    = kind
-          @right   = right
-          @builder = builder
+        def initialize(kind, right, builder = Builder.new)
+          super(builder)
+          @kind = kind
+          @right = right
         end
 
         def on_with_exp(sexpr)
@@ -15,7 +15,7 @@ module Alf
             reordered = Reorder.new(sexpr.to_attr_list).call(@right)
             [ :with_exp,
               sexpr.with_spec + reordered.with_spec.sexpr_body,
-              [ @kind, @builder.all, sexpr.select_exp, reordered.select_exp ] ]
+              [ @kind, builder.all, sexpr.select_exp, reordered.select_exp ] ]
           else
             [ :with_exp,
               sexpr.with_spec,
@@ -28,9 +28,9 @@ module Alf
           if @right.with_exp?
             [ :with_exp,
               reordered.with_spec,
-              [ @kind, @builder.all, sexpr, reordered.select_exp ] ]
+              [ @kind, builder.all, sexpr, reordered.select_exp ] ]
           else
-            [ @kind, @builder.all, sexpr, reordered ]
+            [ @kind, builder.all, sexpr, reordered ]
           end
         end
         alias :on_union      :on_nonjoin_exp
@@ -39,6 +39,6 @@ module Alf
         alias :on_select_exp :on_nonjoin_exp
 
       end # class Merge
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf

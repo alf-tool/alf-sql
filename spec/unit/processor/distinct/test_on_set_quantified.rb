@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    module Processor
+    class Processor
       describe Distinct, "on_set_quantified" do
 
         subject{ Distinct.new.on_set_quantified(expr) }

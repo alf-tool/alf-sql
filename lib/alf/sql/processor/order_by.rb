@@ -1,14 +1,14 @@
 module Alf
   module Sql
-    module Processor
-      class OrderBy < MainSelectRewriter
+    class Processor
+      class OrderBy < Processor
         grammar Sql::Grammar
 
         def initialize(ordering, builder = Builder.new)
+          super(builder)
           @ordering = ordering
-          @builder  = builder
         end
-        attr_reader :ordering, :builder
+        attr_reader :ordering
 
         def on_ndadic(sexpr)
           sexpr = builder.from_self(sexpr)
@@ -29,6 +29,6 @@ module Alf
         end
 
       end # class OrderBy
-    end # module Processor
+    end # class Processor
   end # module Sql
 end # module Alf
