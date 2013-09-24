@@ -1,0 +1,33 @@
+- query: |-
+    project(suppliers, [:sid])
+  sql: |-
+    SELECT t1.sid
+      FROM suppliers AS t1
+#
+- query: |-
+    project(suppliers, [:sid], allbut: true)
+  sql: |-
+    SELECT t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+#
+- query: |-
+    project(suppliers, [:name])
+  sql: |-
+    SELECT t1.name
+      FROM suppliers AS t1
+#
+- query: |-
+    project(suppliers, [:status])
+  sql: |-
+    SELECT DISTINCT t1.status
+      FROM suppliers AS t1
+#
+- query: |-
+    project(suppliers, [:status, :city, :name])
+  sql: |-
+    SELECT t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+  comment: |-
+    The projection applies to the heading, that keeps its own order. The
+    ordering of fields therefore differs from what could be expected. It's
+    not a semantics issue, though.

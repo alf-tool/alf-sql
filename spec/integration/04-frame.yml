@@ -1,0 +1,37 @@
+#
+- query: |-
+    frame(suppliers, [[:sid, :asc]], 2, 4)
+  sql: |-
+    SELECT t1.sid, t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+    ORDER BY t1.sid ASC
+    LIMIT 4 OFFSET 2
+#
+- query: |-
+    frame(suppliers, [[:city, :desc]], 2, 4)
+  sql: |-
+    SELECT t1.sid, t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+    ORDER BY t1.city DESC, t1.sid ASC
+    LIMIT 4 OFFSET 2
+#
+- query: |-
+    frame(sort(suppliers, [[:city, :desc], [:sid, :asc]]), [[:city, :desc]], 2, 4)
+  sql: |-
+    SELECT t1.sid, t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+    ORDER BY t1.city DESC, t1.sid ASC
+    LIMIT 4 OFFSET 2
+#
+- query: |-
+    frame(sort(suppliers, [[:sid, :asc], [:city, :desc]]), [[:city, :desc]], 2, 4)
+  sql: |-
+    WITH t2 AS (
+      SELECT t1.sid, t1.name, t1.status, t1.city
+        FROM suppliers AS t1
+       ORDER BY t1.sid ASC, t1.city DESC
+    )
+    SELECT t2.sid, t2.name, t2.status, t2.city
+      FROM t2 AS t2
+    ORDER BY t2.city DESC, t2.sid ASC
+    LIMIT 4 OFFSET 2

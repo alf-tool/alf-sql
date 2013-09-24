@@ -1,0 +1,13 @@
+language: ruby
+bundler_args: --without=release doc extra
+script: "bundle exec rake"
+rvm:
+  - 1.9.2
+  - 1.9.3
+  - 2.0.0
+  - jruby-19mode
+  - ruby-head
+  - jruby-head
+notifications:
+  email:
+    - blambeau@gmail.com

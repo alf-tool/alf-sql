@@ -1,0 +1,29 @@
+template-info:
+  name: alf.noe
+  version: 0.1.0
+  manifest:
+    tasks/test.rake:
+      safe-override: false
+    Gemfile:
+      safe-override: false
+variables:
+  lower:
+    sql
+  upper:
+    Sql
+  version:
+    0.14.0
+  summary:
+    An abstract SQL compiler for Alf expressions 
+  description: |-
+    This project implements an abstract SQL compiler for Alf expressions
+  authors:
+    - {name: Bernard Lambeau, email: blambeau at gmail.com}
+  links:
+    - http://github.com/blambeau/alf-sql
+    - http://github.com/blambeau/alf
+  dependencies:
+    - {name: alf-core,  version: "~> 0.14.0", groups: [runtime]}
+    - {name: sexpr,     version: "~> 0.5.1",  groups: [runtime]}
+    - {name: rake,      version: "~> 10.1",   groups: [development]}
+    - {name: rspec,     version: "~> 2.14",   groups: [development]}

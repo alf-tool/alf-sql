@@ -1,0 +1,5 @@
+- query: |-
+    clip(suppliers, [:sid, :status])
+  sql: |-
+    SELECT t1.sid, t1.status
+      FROM suppliers AS t1
