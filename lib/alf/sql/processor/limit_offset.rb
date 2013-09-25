@@ -11,14 +11,12 @@ module Alf
         end
         attr_reader :limit, :offset
 
-        def on_union(sexpr)
+        def on_nadic(sexpr)
+          apply(builder.from_self(sexpr))
         end
-
-        def on_except(sexpr)
-        end
-
-        def on_intersect(sexpr)
-        end
+        alias :on_union     :on_nadic
+        alias :on_except    :on_nadic
+        alias :on_intersect :on_nadic
 
         def on_select_exp(sexpr)
           sexpr  = builder.from_self(sexpr) if obc = sexpr.limit_or_offset?

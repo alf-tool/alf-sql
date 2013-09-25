@@ -10,13 +10,13 @@ module Alf
         end
         attr_reader :ordering
 
-        def on_ndadic(sexpr)
+        def on_nadic(sexpr)
           sexpr = builder.from_self(sexpr)
           call(sexpr)
         end
-        alias :on_union     :on_ndadic
-        alias :on_except    :on_ndadic
-        alias :on_intersect :on_ndadic
+        alias :on_union     :on_nadic
+        alias :on_except    :on_nadic
+        alias :on_intersect :on_nadic
 
         def on_select_exp(sexpr)
           if obc = sexpr.order_by_clause
