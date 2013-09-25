@@ -7,11 +7,11 @@ module Alf
       end
 
       def distinct
-        [:set_quantifier, "distinct"]
+        Grammar.sexpr [:set_quantifier, "distinct"]
       end
 
       def all
-        [:set_quantifier, "all"]
+        Grammar.sexpr [:set_quantifier, "all"]
       end
       alias :not_distinct :all
 
@@ -35,10 +35,10 @@ module Alf
         attrs.map{|a| select_item(qualifier, a) }.unshift(:select_list)
       end
 
-      def select_item(qualifier, name)
+      def select_item(qualifier, name, as = name)
         [:select_item,
           qualified_name(qualifier, name.to_s),
-          column_name(name.to_s)]
+          column_name(as.to_s)]
       end
 
       def from_clause(table_name, qualifier)

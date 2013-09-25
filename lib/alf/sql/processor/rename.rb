@@ -9,11 +9,15 @@ module Alf
           @renaming = renaming
         end
 
-        alias :on_select_list :copy_and_apply
+        def on_select_list(sexpr)
+          sexpr.each_with_index.map{|child,index|
+            index == 0 ? child : apply(child)
+          }
+        end
 
         def on_select_item(sexpr)
           return sexpr unless newname = @renaming[sexpr.as_name.to_sym]
-          [:select_item, sexpr[1], [:column_name, newname.to_s]]
+          builder.select_item(sexpr.qualifier, sexpr.would_be_name, newname.to_s)
         end
 
       end # class Rename

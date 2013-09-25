@@ -10,10 +10,9 @@ module Alf
         end
 
         def on_select_list(sexpr)
-          items = sexpr.sexpr_body.select{|item|
-            @attributes.include?(item.as_name.to_sym)
+          sexpr.select{|child|
+            (child == :select_list) || @attributes.include?(child.as_name.to_sym)
           }
-          items.unshift(:select_list)
         end
 
       end # class Clip

@@ -11,8 +11,7 @@ module Alf
         attr_reader :ordering
 
         def on_nadic(sexpr)
-          sexpr = builder.from_self(sexpr)
-          call(sexpr)
+          call(builder.from_self(sexpr))
         end
         alias :on_union     :on_nadic
         alias :on_except    :on_nadic
