@@ -17,7 +17,8 @@ Path.dir.glob('*.yml').each do |file|
   basename = file.basename.to_s
   queries  = file.load
 
-  # ensure creation of the compiler
+  # ensure creation of the parser and compiler
+  conn.parse("DUM")
   compiler
 
   queries.each do |query|
