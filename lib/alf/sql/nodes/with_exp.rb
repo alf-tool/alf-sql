@@ -17,8 +17,8 @@ module Alf
         last
       end
 
-      def qualifier_proc
-        select_exp.qualifier_proc
+      def desaliaser
+        select_exp.desaliaser
       end
 
     # to_xxx

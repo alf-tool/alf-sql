@@ -23,7 +23,7 @@ module Alf
             sexpr = builder.from_self(sexpr)
             call(sexpr)
           else
-            needed = builder.order_by_clause(ordering, &sexpr.qualifier_proc)
+            needed = builder.order_by_clause(ordering, &sexpr.desaliaser)
             sexpr.dup.push(needed)
           end
         end

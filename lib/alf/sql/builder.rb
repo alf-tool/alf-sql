@@ -74,13 +74,15 @@ module Alf
         [:table_name, name]
       end
 
-      def order_by_clause(ordering, &qualifier)
+      def order_by_clause(ordering, &desaliaser)
         Grammar.sexpr \
           ordering.to_a.map{|(s,d)|
             if s.composite?
               raise NotSupportedError, "SQL order by does not support composite selectors"
             end
-            [:order_by_term, qualify(s.outcoerce.to_s, qualifier), d.to_s]
+            name = s.outcoerce.to_s
+            name = (desaliaser && desaliaser[name]) || column_name(name)
+            [:order_by_term, name, d.to_s]
           }.unshift(:order_by_clause)
       end
 
@@ -100,14 +102,6 @@ module Alf
 
       def next_qualifier!
         "t#{@next_qualifier += 1}"
-      end
-
-    private
-
-      def qualify(name, qualifier)
-        return column_name(name) unless qualifier
-        return column_name(name) unless q = qualifier[name]
-        qualified_name(q, name)
       end
 
     end

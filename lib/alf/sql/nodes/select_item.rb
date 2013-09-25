@@ -3,12 +3,20 @@ module Alf
     module SelectItem
       include Expr
 
+      def left
+        self[1]
+      end
+
+      def right
+        self[2]
+      end
+
       def qualifier
-        self[1].qualifier
+        left.qualifier
       end
 
       def would_be_name
-        self[1].would_be_name
+        left.would_be_name
       end
 
       def as_name

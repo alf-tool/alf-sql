@@ -16,7 +16,11 @@ module Alf
       end
 
       context 'when qualified' do
-        let(:expr){ builder.order_by_clause(ordering){|a| "t1"} }
+        let(:expr){
+          builder.order_by_clause(ordering){|a|
+            [:qualified_name, [:range_var_name, "t1"], [:column_name, a]]
+          }
+        }
 
         it{ should eq(ordering) }
       end

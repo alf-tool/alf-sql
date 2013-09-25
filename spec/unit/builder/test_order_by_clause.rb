@@ -5,7 +5,7 @@ module Alf
 
       let(:ordering){ Ordering.new([[:name, :asc], [:city, :desc]]) }
 
-      context 'without qualifier' do
+      context 'without desaliaser' do
         subject{ builder.order_by_clause(ordering) }
 
         let(:expected){
@@ -17,10 +17,18 @@ module Alf
         it{ should eq(expected) }
       end
 
-      context 'with a qualifier' do
-        let(:quantifiers){ {'name' => "t1"} }
+      context 'with a desaliaser' do
+        let(:desaliaser){
+          ->(a){
+            if a == "name"
+              [:qualified_name, [:range_var_name, "t1"], [:column_name, a]]
+            else
+              nil
+            end
+          }
+        }
 
-        subject{ builder.order_by_clause(ordering){|a| quantifiers[a] } }
+        subject{ builder.order_by_clause(ordering, &desaliaser) }
 
         let(:expected){
           [:order_by_clause,

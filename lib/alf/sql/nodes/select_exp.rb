@@ -43,8 +43,8 @@ module Alf
         find_child(:offset_clause)
       end
 
-      def qualifier_proc
-        select_list.qualifier_proc
+      def desaliaser
+        select_list.desaliaser
       end
 
     ### to_xxx

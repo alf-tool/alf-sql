@@ -14,7 +14,7 @@ module Alf
             raise NotSupportedError
           else
             wc = [ :where_clause, 
-                   @predicate.qualify(sexpr.qualifier_proc).sexpr ]
+                   @predicate.rename(sexpr.desaliaser).sexpr ]
             sexpr.dup.insert(4, Grammar.sexpr(wc))
           end
         end

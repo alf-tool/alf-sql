@@ -3,10 +3,10 @@ module Alf
     module SelectList
       include Expr
 
-      def qualifier_proc
+      def desaliaser
         ->(a){
           item = sexpr_body.find{|item| item.as_name.to_s == a.to_s }
-          item && item.qualifier
+          item && item.left
         }
       end
 
