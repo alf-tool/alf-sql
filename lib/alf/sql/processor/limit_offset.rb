@@ -22,7 +22,7 @@ module Alf
           sexpr  = builder.from_self(sexpr) if obc = sexpr.limit_or_offset?
           limit_clause = builder.limit_clause(limit)
           offset_clause = builder.offset_clause(offset)
-          sexpr.dup.push(limit_clause).push(offset_clause)
+          sexpr.with_push(limit_clause, offset_clause)
         end
 
       end # class LimitOffset

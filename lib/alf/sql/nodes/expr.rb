@@ -43,10 +43,30 @@ module Alf
         obc && order_by_clause.to_ordering
       end
 
+      def with_update(index, what)
+        index = find_child_index(index) if index.is_a?(Symbol)
+        dup.tap{|x| x[index] = Grammar.sexpr(what) }
+      end
+
+      def with_insert(index, what)
+        dup.tap{|x| x.insert(index, Grammar.sexpr(what)) }
+      end
+
+      def with_push(*sexprs)
+        dup.push(*sexprs)
+      end
+
     private
 
       def find_child(kind)
         find{|x| x.is_a?(Array) && x.first == kind }
+      end
+
+      def find_child_index(kind)
+        each_with_index do |child,index|
+          return index if child.is_a?(Array) && child.first == kind
+        end
+        nil
       end
 
       def each_child(skip = 0)

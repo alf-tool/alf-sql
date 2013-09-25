@@ -10,12 +10,13 @@ module Alf
         end
 
         def on_select_exp(sexpr)
+          pred = @predicate.rename(sexpr.desaliaser).sexpr
           if sexpr.where_clause
-            raise NotSupportedError
+            anded = [:and, sexpr.where_clause.bool_exp, pred ]
+            anded = Alf::Predicate::Grammar.sexpr(anded)
+            sexpr.with_update(:where_clause, [ :where_clause, anded ])
           else
-            wc = [ :where_clause, 
-                   @predicate.rename(sexpr.desaliaser).sexpr ]
-            sexpr.dup.insert(4, Grammar.sexpr(wc))
+            sexpr.with_insert(4, [ :where_clause, pred ])
           end
         end
 

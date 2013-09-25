@@ -12,7 +12,7 @@ module Alf
 
         context 'when already distinct' do
           let(:expr){
-            [:x, distinct]
+            Grammar.sexpr [:x, distinct]
           }
 
           it{ should eq(expected) }
@@ -20,7 +20,7 @@ module Alf
 
         context 'when not distinct' do
           let(:expr){
-            [:x, not_distinct]
+            Grammar.sexpr [:x, not_distinct]
           }
 
           it{ should eq(expected) }

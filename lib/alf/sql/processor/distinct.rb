@@ -5,7 +5,7 @@ module Alf
         grammar Sql::Grammar
 
         def on_set_quantified(sexpr)
-          sexpr.dup.tap{|x| x[1] = builder.distinct }
+          sexpr.with_update(1, builder.distinct)
         end
         alias :on_union      :on_set_quantified
         alias :on_except     :on_set_quantified
