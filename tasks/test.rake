@@ -10,7 +10,7 @@ namespace :test do
   desc "Run integration tests"
   RSpec::Core::RakeTask.new(:integration) do |t|
     t.pattern = "spec/integration/**/test_*.rb"
-    t.rspec_opts = ["--color", "-Ilib", "-Ispec/unit"]
+    t.rspec_opts = ["--color", "-Ilib", "-Ispec/integration"]
   end
   
 end
