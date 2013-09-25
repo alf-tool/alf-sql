@@ -2,21 +2,25 @@ module Alf
   module Sql
     module Expr
 
-      LEFT_PARENTHESE = "(".freeze
+      LEFT_PARENTHESE  = "(".freeze
       RIGHT_PARENTHESE = ")".freeze
-      SPACE = " ".freeze
-      AS = "AS".freeze
-      AND = "AND".freeze
-      OR = "OR".freeze
-      EQUAL = "=".freeze
-      NOT_EQUAL = "<>".freeze
-      COMMA = ",".freeze
-      DOT = ".".freeze
-      QUOTE = "'".freeze
-      GREATER = ">".freeze
-      LESS = "<".freeze
+      SPACE            = " ".freeze
+      COMMA            = ",".freeze
+      DOT              = ".".freeze
+      QUOTE            = "'".freeze
+      AS               = "AS".freeze
+      AND              = "AND".freeze
+      OR               = "OR".freeze
+      NOT              = "NOT".freeze
+      TRUE             = "TRUE".freeze
+      FALSE            = "FALSE".freeze
+      EQUAL            = "=".freeze
+      NOT_EQUAL        = "<>".freeze
+      GREATER          = ">".freeze
+      LESS             = "<".freeze
       GREATER_OR_EQUAL = ">=".freeze
-      LESS_OR_EQUAL = "<=".freeze
+      LESS_OR_EQUAL    = "<=".freeze
+      IN               = "IN".freeze
 
       def clip(attributes)
         Processor::Clip.new(attributes).call(self)
