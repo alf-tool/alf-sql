@@ -9,20 +9,20 @@ module Alf
       attr_reader :builder
 
       def on_with_exp(sexpr)
-        [ :with_exp,
-          sexpr.with_spec,
-          apply(sexpr.select_exp) ]
+        sexpr.with_update(-1, apply(sexpr.select_exp))
       end
 
       def on_nadic(sexpr)
-        sexpr[0..1] + sexpr[2..-1].map{|x| apply(x) }
+        sexpr.each_with_index.map{|child,index|
+          index <= 1 ? child : apply(child)
+        }
       end
       alias :on_union     :on_nadic
       alias :on_except    :on_nadic
       alias :on_intersect :on_nadic
 
       def on_select_exp(sexpr)
-        sexpr[0..1] + [ apply(sexpr[2]) ] + sexpr[3..-1]
+        sexpr.with_update(2, apply(sexpr[2]))
       end
 
     end

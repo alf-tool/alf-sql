@@ -14,7 +14,7 @@ module Alf
       subject{ clazz.new.on_select_exp(expr) }
 
       let(:expr){
-        [:select_exp, distinct, select_list_ab, [:baz]]
+        Grammar.sexpr [:select_exp, distinct, select_list_ab, [:baz]]
       }
 
       let(:expected){
