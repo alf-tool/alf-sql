@@ -3,7 +3,6 @@ module Alf
     class Processor
       class SemiJoin < Processor
         include JoinSupport
-        grammar Sql::Grammar
 
         def initialize(right, negate = false, builder = Builder.new)
           super(builder)

@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class Clip < Processor
-        grammar Sql::Grammar
 
         def initialize(attributes, on_empty = :is_table_dee, builder = Builder.new)
           super(builder)

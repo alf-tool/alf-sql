@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class Where < Processor
-        grammar Sql::Grammar
 
         def initialize(predicate, builder = Builder.new)
           super(builder)

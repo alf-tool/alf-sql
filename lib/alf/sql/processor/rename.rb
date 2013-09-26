@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class Rename < Processor
-        grammar Sql::Grammar
 
         def initialize(renaming, builder = Builder.new)
           super(builder)

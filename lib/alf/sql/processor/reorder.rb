@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class Reorder < Processor
-        grammar Sql::Grammar
 
         def initialize(attr_list, builder = Builder.new)
           super(builder)

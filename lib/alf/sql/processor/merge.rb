@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class Merge < Processor
-        grammar Sql::Grammar
 
         def initialize(kind, right, builder = Builder.new)
           super(builder)

@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class LimitOffset < Processor
-        grammar Sql::Grammar
 
         def initialize(limit, offset, builder = Builder.new)
           super(builder)

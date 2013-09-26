@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class Distinct < Processor
-        grammar Sql::Grammar
 
         def on_set_quantified(sexpr)
           sexpr.with_update(1, builder.distinct)

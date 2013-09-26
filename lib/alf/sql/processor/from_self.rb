@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class FromSelf < Processor
-        grammar Sql::Grammar
 
         def on_with_exp(sexpr)
           q = builder.next_qualifier!

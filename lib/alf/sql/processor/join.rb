@@ -3,7 +3,6 @@ module Alf
     class Processor
       class Join < Processor
         include JoinSupport
-        grammar Sql::Grammar
 
         def initialize(right, builder = Builder.new)
           super(builder)

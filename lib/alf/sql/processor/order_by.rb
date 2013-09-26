@@ -2,7 +2,6 @@ module Alf
   module Sql
     class Processor
       class OrderBy < Processor
-        grammar Sql::Grammar
 
         def initialize(ordering, builder = Builder.new)
           super(builder)
