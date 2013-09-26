@@ -23,17 +23,11 @@ rules:
     - [ set_quantifier, nonjoin_exp, nonjoin_exp ]
   join_exp:
     - cross_join
-    - natural_join
-    - join_on
-    - join_using
+    - inner_join
   cross_join:
     - [ table_spec, table_spec ]
-  natural_join:
-    - [ table_spec, table_spec ]
-  join_on:
+  inner_join:
     - [ table_spec, table_spec, predicate ]
-  join_using:
-    - [ table_spec, table_spec, using ]
   using:
     - [ column_name+ ]
   select_exp:

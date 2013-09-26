@@ -25,6 +25,12 @@ module Alf
         sexpr.with_update(2, apply(sexpr[2]))
       end
 
+    private
+
+      def tautology
+        Predicate::Factory.tautology
+      end
+
     end
   end
 end
@@ -37,3 +43,4 @@ require_relative 'processor/from_self'
 require_relative 'processor/reorder'
 require_relative 'processor/merge'
 require_relative 'processor/where'
+require_relative 'processor/join'

@@ -103,3 +103,12 @@
     SELECT t1.sid, t1.name, t1.status, t1.city
       FROM suppliers AS t1
      WHERE t1.sid = 'S1' AND t1.status = 20
+# restrict(join)
+- query: |-
+    restrict(join(suppliers, supplies), sid: 'S2', qty: 300)
+  sql:
+    SELECT t1.sid, t1.name, t1.status, t1.city, t2.pid, t2.qty
+      FROM suppliers AS t1
+      JOIN supplies  AS t2 ON t1.sid = t2.sid
+     WHERE t1.sid = 'S2'
+       AND t2.qty = 300

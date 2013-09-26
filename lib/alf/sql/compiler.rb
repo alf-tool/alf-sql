@@ -39,7 +39,7 @@ module Alf
       end
 
       def on_join(expr, left, right)
-        # -> SQL's JOIN
+        rewrite(left, expr, Processor::Join, [right.sexpr])
       end
 
       def on_matching(expr, left, right)
