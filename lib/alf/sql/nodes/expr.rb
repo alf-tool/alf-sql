@@ -22,18 +22,6 @@ module Alf
       LESS_OR_EQUAL    = "<=".freeze
       IN               = "IN".freeze
 
-      def clip(attributes)
-        Processor::Clip.new(attributes).call(self)
-      end
-
-      def rename(renaming)
-        Processor::Rename.new(renaming).call(self)
-      end
-
-      def distinct
-        Processor::Distinct.call(self)
-      end
-
       def nadic?
         false
       end
