@@ -16,6 +16,13 @@ PATH
       alf-core (~> 0.14.0)
       quickl (~> 0.4.3)
 
+PATH
+  remote: ../alf-test
+  specs:
+    alf-test (0.14.0)
+      alf-core (~> 0.14.0)
+      path (~> 1.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -43,6 +50,7 @@ PLATFORMS
 DEPENDENCIES
   alf-core!
   alf-shell!
+  alf-test!
   awesome_print
   rake (~> 10.1)
   rspec (~> 2.14)

@@ -1,7 +1,7 @@
 module Helpers
 
   def conn
-    Alf.connect(Path.dir, viewpoint: TestViewpoint)
+    Alf.connect(Path.dir, viewpoint: Alf::Test::Fake)
   end
 
   def strip(x)

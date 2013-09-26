@@ -26,7 +26,7 @@ module Alf
         end
       end
 
-      Path.dir.glob("*.yml").each do |file|
+      Alf::Test.each_query_file do |file|
         describe "On #{file.basename}" do
           install_tests_for(file.load)
         end
