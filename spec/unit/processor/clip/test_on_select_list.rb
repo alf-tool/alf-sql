@@ -18,13 +18,6 @@ module Alf
           it{ should eq(select_list_a) }
         end
 
-        context 'when leading to an empty select_list' do
-          let(:expr){ select_list_b }
-
-          pending "Not implemented empty select lists" do
-          end
-        end
-
       end
     end
   end

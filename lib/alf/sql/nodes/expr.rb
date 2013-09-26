@@ -21,6 +21,7 @@ module Alf
       GREATER_OR_EQUAL = ">=".freeze
       LESS_OR_EQUAL    = "<=".freeze
       IN               = "IN".freeze
+      EXISTS           = "EXISTS".freeze
 
       def nadic?
         false

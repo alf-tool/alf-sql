@@ -16,7 +16,7 @@ module Alf
       ### non-relational
 
       def on_clip(expr, compiled)
-        rewrite(compiled, expr, Processor::Clip, [expr.attributes])
+        rewrite(compiled, expr, Processor::Clip, [expr.attributes, :is_table_dee])
       end
 
       def on_sort(expr, compiled)
@@ -67,8 +67,8 @@ module Alf
       def on_project(expr, compiled)
         preserving = expr.key_preserving? rescue false
         #
-        compiled = self._call(parser.clip(expr, expr.stay_attributes), [ compiled ])
         compiled = rewrite(compiled, expr, Processor::Distinct) unless preserving
+        compiled = self._call(parser.clip(expr, expr.stay_attributes), [ compiled ])
         #
         rebind(compiled, expr)
       end

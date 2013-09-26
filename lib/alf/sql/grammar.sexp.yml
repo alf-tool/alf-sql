@@ -32,7 +32,7 @@ rules:
     - [ column_name+ ]
   select_exp:
     - [ set_quantifier,
-        select_list,
+        [ select_list, select_star ],
         from_clause,
         where_clause,
         order_by_clause,
@@ -40,6 +40,8 @@ rules:
         offset_clause ]
   set_quantifier:
     - [ set_quantifier_name ]
+  select_star:
+    - []
   set_quantifier_name:
     !ruby/regexp /^all|distinct$/
   select_list:

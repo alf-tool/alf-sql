@@ -28,6 +28,16 @@ module Helpers
       sexpr [:intersect, all, left, right]
     end
 
+    def select_is_table_dee(where)
+      exists = Alf::Predicate::Grammar.sexpr([:exists, where])
+      sexpr [:select_exp, all,
+              [:select_list,
+                [:select_item,
+                  [:literal, true],
+                  [:column_name, "is_table_dee"]] ],
+              [:where_clause, exists] ]
+    end
+
     def select_ab
       sexpr [:select_exp, all, select_list, from_clause]
     end
@@ -40,6 +50,10 @@ module Helpers
       sexpr [:select_exp, distinct, select_list, from_clause]
     end
 
+    def select_distinct_star
+      sexpr [:select_exp, distinct, select_star, from_clause]
+    end
+
     def select_distinct_ab
       sexpr [:select_exp, distinct, select_list_ab, from_clause]
     end
@@ -50,6 +64,10 @@ module Helpers
 
     def select_all
       sexpr [:select_exp, all, select_list, from_clause]
+    end
+
+    def select_all_star
+      sexpr [:select_exp, all, select_star, from_clause]
     end
 
     def select_all_t2
@@ -74,6 +92,10 @@ module Helpers
 
     def select_all_b
       sexpr [:select_exp, all, select_list_b, from_clause]
+    end
+
+    def select_star
+      sexpr [:select_star]
     end
 
     def select_list(hash = {"a" => "a", "b" => "b"})

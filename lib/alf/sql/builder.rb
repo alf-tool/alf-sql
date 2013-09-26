@@ -23,8 +23,22 @@ module Alf
       def select_all(heading, name, qualifier = next_qualifier!)
         Grammar.sexpr \
           [ :select_exp, all,
-              select_list(heading, qualifier),
-              from_clause(name, qualifier) ]
+            select_list(heading, qualifier),
+            from_clause(name, qualifier) ]
+      end
+
+      def select_is_table_dee(subquery)
+        Grammar.sexpr \
+          [ :select_exp, all, is_table_dee,
+            [:where_clause, exists(subquery)] ]
+      end
+
+      def is_table_dee
+        Grammar.sexpr \
+          [:select_list,
+            [:select_item,
+              [:literal, true],
+              [:column_name, "is_table_dee"] ] ]
       end
 
       def select_list(heading, qualifier)
@@ -39,6 +53,10 @@ module Alf
         [:select_item,
           qualified_name(qualifier, name.to_s),
           column_name(as.to_s)]
+      end
+
+      def select_star
+        Grammar.sexpr [:select_star]
       end
 
       def from_clause(table_name, qualifier)
@@ -72,6 +90,10 @@ module Alf
 
       def table_name(name)
         [:table_name, name]
+      end
+
+      def exists(subquery)
+        Predicate::Grammar.sexpr [ :exists, subquery ]
       end
 
       def order_by_clause(ordering, &desaliaser)
