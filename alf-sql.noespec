@@ -24,6 +24,6 @@ variables:
     - http://github.com/blambeau/alf
   dependencies:
     - {name: alf-core,  version: "~> 0.14.0", groups: [runtime]}
-    - {name: sexpr,     version: "~> 0.5.1",  groups: [runtime]}
+    - {name: sexpr,     version: "~> 0.6.0",  groups: [runtime]}
     - {name: rake,      version: "~> 10.1",   groups: [development]}
     - {name: rspec,     version: "~> 2.14",   groups: [development]}
