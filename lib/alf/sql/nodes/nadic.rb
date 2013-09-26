@@ -36,7 +36,10 @@ module Alf
           sql_parenthesized(buffer){|b| to_sql(b, false) }
         else
           between = "" << SPACE << keyword
-          between << SPACE << self[1] unless all?
+          unless distinct?
+            between << SPACE
+            set_quantifier.to_sql(between)
+          end
           between << SPACE
           each_child(1) do |child, index|
             buffer << between unless index==1

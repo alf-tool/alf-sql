@@ -14,7 +14,7 @@ module Alf
             reordered = Reorder.new(sexpr.to_attr_list).call(@right)
             [ :with_exp,
               sexpr.with_spec + reordered.with_spec.sexpr_body,
-              [ @kind, builder.all, sexpr.select_exp, reordered.select_exp ] ]
+              [ @kind, builder.distinct, sexpr.select_exp, reordered.select_exp ] ]
           else
             [ :with_exp,
               sexpr.with_spec,
@@ -27,9 +27,9 @@ module Alf
           if @right.with_exp?
             [ :with_exp,
               reordered.with_spec,
-              [ @kind, builder.all, sexpr, reordered.select_exp ] ]
+              [ @kind, builder.distinct, sexpr, reordered.select_exp ] ]
           else
-            [ @kind, builder.all, sexpr, reordered ]
+            [ @kind, builder.distinct, sexpr, reordered ]
           end
         end
         alias :on_union      :on_nonjoin_exp

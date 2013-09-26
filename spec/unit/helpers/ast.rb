@@ -17,15 +17,15 @@ module Helpers
     end
 
     def union(left = select_all, right = select_all_t2)
-      sexpr [:union, all, left, right]
+      sexpr [:union, distinct, left, right]
     end
 
     def except(left = select_all, right = select_all_t2)
-      sexpr [:except, all, left, right]
+      sexpr [:except, distinct, left, right]
     end
 
     def intersect(left = select_all, right = select_all_t2)
-      sexpr [:intersect, all, left, right]
+      sexpr [:intersect, distinct, left, right]
     end
 
     def select_is_table_dee(where)
