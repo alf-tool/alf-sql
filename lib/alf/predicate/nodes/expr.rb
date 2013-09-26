@@ -4,6 +4,10 @@ module Alf
 
       def to_sql_literal(buffer, value)
         case value
+        when TrueClass
+          buffer << Sql::Expr::TRUE
+        when FalseClass
+          buffer << Sql::Expr::FALSE
         when Integer, Float
           buffer << value.to_s
         else
