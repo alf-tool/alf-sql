@@ -2,6 +2,7 @@ module Alf
   module Sql
     module WithExp
       include Expr
+      extend Forwardable
 
       WITH = "WITH".freeze
 
@@ -16,20 +17,19 @@ module Alf
       def select_exp
         last
       end
-
-      def desaliaser
-        select_exp.desaliaser
-      end
+      def_delegators :select_exp, :select_list,
+                                  :where_clause,
+                                  :predicate,
+                                  :from_clause,
+                                  :table_spec,
+                                  :order_by_clause,
+                                  :limit_clause,
+                                  :offset_clause,
+                                  :desaliaser,
+                                  :to_attr_list,
+                                  :to_ordering
 
     # to_xxx
-
-      def to_attr_list
-        last.to_attr_list
-      end
-
-      def to_ordering
-        last.to_ordering
-      end
 
       def to_sql(buffer = "")
         buffer << WITH << SPACE

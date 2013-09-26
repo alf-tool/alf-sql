@@ -23,12 +23,28 @@ module Alf
         set_quantifier.all?
       end
 
+      def select_exp
+        self
+      end
+
       def select_list
         self[2]
       end
 
       def where_clause
         find_child(:where_clause)
+      end
+
+      def predicate
+        where_clause && where_clause.predicate
+      end
+
+      def from_clause
+        find_child(:from_clause)
+      end
+
+      def table_spec
+        from_clause.table_spec
       end
 
       def order_by_clause
