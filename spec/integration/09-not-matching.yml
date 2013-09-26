@@ -1,0 +1,25 @@
+# matching with no attribute
+- query: |-
+    not_matching(suppliers, project(supplies, [:qty]))
+  sql:
+    SELECT t1.sid, t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+      WHERE NOT(EXISTS(SELECT * FROM supplies AS t2))
+# not matching on one single attribute
+- query: |-
+    not_matching(suppliers, supplies)
+  sql:
+    SELECT t1.sid, t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+      WHERE NOT(t1.sid IN (SELECT t2.sid FROM supplies AS t2))
+# matching on multiple attributes
+- query: |-
+    not_matching(suppliers, parts)
+  sql:
+    SELECT t1.sid, t1.name, t1.status, t1.city
+      FROM suppliers AS t1
+      WHERE NOT(EXISTS(
+        SELECT t2.name, t2.city
+          FROM parts AS t2
+         WHERE t1.name = t2.name
+           AND t1.city = t2.city))

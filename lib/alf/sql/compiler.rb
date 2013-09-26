@@ -43,7 +43,7 @@ module Alf
       end
 
       def on_matching(expr, left, right)
-        # -> SQL's WHERE EXISTS / WHERE IN
+        rewrite(left, expr, Processor::SemiJoin, [right.sexpr, false])
       end
 
       def on_minus(expr, left, right)
@@ -51,7 +51,7 @@ module Alf
       end
 
       def on_not_matching(expr, left, right)
-        # -> SQL's WHERE NOT EXISTS / WHERE NOT IN
+        rewrite(left, expr, Processor::SemiJoin, [right.sexpr, true])
       end
 
       def on_page(expr, compiled)

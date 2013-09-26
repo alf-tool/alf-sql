@@ -2,6 +2,7 @@ module Alf
   module Sql
     class Processor
       class Join < Processor
+        include JoinSupport
         grammar Sql::Grammar
 
         def initialize(right, builder = Builder.new)
@@ -20,40 +21,19 @@ module Alf
           end
         end
 
-        def on_main_exp(sexpr)
-          joined = join_select_exps(sexpr.select_exp, right.select_exp)
-          merge_with_exps(sexpr, right, joined)
-        end
-        alias :on_with_exp   :on_main_exp
-        alias :on_select_exp :on_main_exp
-
       private
 
-        def unjoinable?(sexpr)
-          sexpr.nadic? or sexpr.limit_or_offset?
-        end
-
-        def merge_with_exps(left, right, joined)
-          if left.with_exp? and right.with_exp?
-            [:with_exp,
-              left.with_spec + right.with_spec.sexpr_body,
-              joined ]
-          elsif left.with_exp?
-            left.with_update(-1, joined)
-          elsif right.with_exp?
-            right.with_update(-1, joined)
-          else
-            joined
-          end
-        end
-
-        def join_select_exps(left, right)
+        def apply_join_strategy(left, right)
           [ :select_exp,
             join_set_quantifiers(left, right),
             join_select_lists(left, right),
             join_from_clauses(left, right),
             join_where_clauses(left, right),
             join_order_by_clauses(left, right) ].compact
+        end
+
+        def unjoinable?(sexpr)
+          sexpr.nadic? or sexpr.limit_or_offset?
         end
 
         def join_set_quantifiers(left, right)
@@ -78,15 +58,6 @@ module Alf
             [:inner_join, left.table_spec, right.table_spec, joincon]
           end
           left.from_clause.with_update(-1, join)
-        end
-
-        def join_predicate(left, right)
-          commons = left.to_attr_list & right.to_attr_list
-          left_d, right_d = left.desaliaser, right.desaliaser
-          commons.to_a.inject(tautology){|cond, attr|
-            left_attr, right_attr = left_d[attr], right_d[attr]
-            cond &= Predicate::Factory.eq(left_attr, right_attr)
-          }
         end
 
         def join_where_clauses(left, right)
