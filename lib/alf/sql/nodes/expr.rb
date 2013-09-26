@@ -60,10 +60,23 @@ module Alf
         dup.push(*sexprs)
       end
 
+      def each_child(skip = 0)
+        each_with_index do |c,i|
+          next if i <= skip
+          yield(c, i - 1)
+        end
+      end
+
     private
 
-      def find_child(kind)
-        find{|x| x.is_a?(Array) && x.first == kind }
+      def find_child(kind = nil, &search)
+        if search.nil? and kind
+          search = ->(x){ x.is_a?(Array) && x.first == kind }
+        end
+        each_child do |child|
+          return child if search.call(child)
+        end
+        nil
       end
 
       def find_child_index(kind)
@@ -71,13 +84,6 @@ module Alf
           return index if child.is_a?(Array) && child.first == kind
         end
         nil
-      end
-
-      def each_child(skip = 0)
-        each_with_index do |c,i|
-          next if i <= skip
-          yield(c, i - 1)
-        end
       end
 
       def sql_parenthesized(buffer)
