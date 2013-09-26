@@ -34,6 +34,10 @@ module Alf
         Processor::Distinct.call(self)
       end
 
+      def nadic?
+        false
+      end
+
       def limit_or_offset?
         not(limit_clause.nil? and offset_clause.nil?)
       end

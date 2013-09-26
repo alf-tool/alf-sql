@@ -11,6 +11,10 @@ module Alf
         false
       end
 
+      def nadic?
+        true
+      end
+
       def distinct?
         set_quantifier.distinct?
       end
