@@ -12,7 +12,7 @@ module Alf
         def on_select_exp(sexpr)
           pred = @predicate.rename(sexpr.desaliaser).sexpr
           if sexpr.where_clause
-            anded = [:and, sexpr.where_clause.bool_exp, pred ]
+            anded = [:and, sexpr.where_clause.predicate, pred ]
             anded = Alf::Predicate::Grammar.sexpr(anded)
             sexpr.with_update(:where_clause, [ :where_clause, anded ])
           else

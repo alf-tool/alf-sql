@@ -5,13 +5,13 @@ module Alf
 
       WHERE = "WHERE".freeze
 
-      def bool_exp
+      def predicate
         last
       end
 
       def to_sql(buffer = "")
         buffer << WHERE << SPACE
-        bool_exp.to_sql(buffer)
+        predicate.to_sql(buffer)
         buffer
       end
 
