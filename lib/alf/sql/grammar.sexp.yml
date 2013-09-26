@@ -51,7 +51,7 @@ rules:
   select_list:
     - [ select_item+ ]
   from_clause:
-    - [ table_spec+ ]
+    - [ table_spec ]
   where_clause:
     - [ predicate ]
   order_by_clause:

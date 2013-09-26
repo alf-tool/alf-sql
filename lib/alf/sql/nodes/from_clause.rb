@@ -3,11 +3,15 @@ module Alf
     module FromClause
       include Expr
 
+      FROM = "FROM".freeze
+
+      def table_spec
+        last
+      end
+
       def to_sql(buffer = "")
-        buffer << "FROM "
-        sexpr_body.each do |c|
-          c.to_sql(buffer)
-        end
+        buffer << FROM << SPACE
+        last.to_sql(buffer)
         buffer
       end
 
