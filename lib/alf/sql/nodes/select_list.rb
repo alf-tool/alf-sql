@@ -10,6 +10,10 @@ module Alf
         }
       end
 
+      def knows?(as_name)
+        find_child{|child| child.as_name == as_name }
+      end
+
       def to_attr_list
         AttrList.coerce(sexpr_body.map{|a| a.as_name })
       end
