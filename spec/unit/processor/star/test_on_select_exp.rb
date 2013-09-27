@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Star, "on_select_list" do
 
-        subject{ Star.new.on_select_exp(expr) }
+        subject{ Star.new(Builder.new).on_select_exp(expr) }
 
         context 'on select_all' do
           let(:expr){ select_all }

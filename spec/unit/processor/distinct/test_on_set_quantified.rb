@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Distinct, "on_set_quantified" do
 
-        subject{ Distinct.new.on_set_quantified(expr) }
+        subject{ Distinct.new(Builder.new).on_set_quantified(expr) }
 
         let(:expected){
           [:x, distinct]

@@ -4,7 +4,7 @@ module Alf
       class SemiJoin < Processor
         include JoinSupport
 
-        def initialize(right, negate = false, builder = Builder.new)
+        def initialize(right, negate = false, builder)
           super(builder)
           @right  = right
           @negate = negate

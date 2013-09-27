@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Rename, "on_select_item" do
 
-        subject{ Rename.new(Renaming[a: :x]).on_select_item(expr) }
+        subject{ Rename.new(Renaming[a: :x], Builder.new).on_select_item(expr) }
 
         context 'when included' do
           let(:expr){ select_item('a', 'a') }

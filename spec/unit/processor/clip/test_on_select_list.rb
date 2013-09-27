@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Clip, "on_select_list" do
 
-        subject{ Clip.new(AttrList[:a]).on_select_list(expr) }
+        subject{ Clip.new(AttrList[:a], Builder.new).on_select_list(expr) }
 
         context 'when included' do
           let(:expr){ select_list_ab }

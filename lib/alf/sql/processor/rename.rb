@@ -3,7 +3,7 @@ module Alf
     class Processor
       class Rename < Processor
 
-        def initialize(renaming, builder = Builder.new)
+        def initialize(renaming, builder)
           super(builder)
           @renaming = renaming
         end

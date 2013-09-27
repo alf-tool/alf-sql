@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Clip, "on_select_exp" do
 
-        subject{ Clip.new(AttrList[:a]).on_select_exp(expr) }
+        subject{ Clip.new(AttrList[:a], Builder.new).on_select_exp(expr) }
 
         context 'normal_case' do
           let(:expr){ select_all }

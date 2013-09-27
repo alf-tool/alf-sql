@@ -4,7 +4,7 @@ module Alf
       class Join < Processor
         include JoinSupport
 
-        def initialize(right, builder = Builder.new)
+        def initialize(right, builder)
           super(builder)
           @right = right
         end

@@ -3,7 +3,7 @@ module Alf
     class Processor
       class LimitOffset < Processor
 
-        def initialize(limit, offset, builder = Builder.new)
+        def initialize(limit, offset, builder)
           super(builder)
           @limit = limit
           @offset = offset

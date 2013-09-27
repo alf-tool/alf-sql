@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Reorder, "on_select_list" do
 
-        subject{ Reorder.new([:b, :a]).on_select_list(expr) }
+        subject{ Reorder.new([:b, :a], Builder.new).on_select_list(expr) }
 
         let(:expr){
           select_list_ab

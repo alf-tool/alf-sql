@@ -11,7 +11,7 @@ module Alf
         }
       }
 
-      subject{ clazz.new.on_set_operator(expr) }
+      subject{ clazz.new(Builder.new).on_set_operator(expr) }
 
       let(:expr){
         [:union, all, select_all_a, select_all_b]

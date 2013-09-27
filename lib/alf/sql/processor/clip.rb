@@ -3,7 +3,7 @@ module Alf
     class Processor
       class Clip < Processor
 
-        def initialize(attributes, on_empty = :is_table_dee, builder = Builder.new)
+        def initialize(attributes, on_empty = :is_table_dee, builder)
           super(builder)
           @attributes = attributes
           @on_empty = on_empty
@@ -30,7 +30,7 @@ module Alf
         end
 
         def select_star(sexpr)
-          All.new.call(Star.new.call(sexpr))
+          All.new(builder).call(Star.new(builder).call(sexpr))
         end
 
       end # class Clip

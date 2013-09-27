@@ -19,7 +19,7 @@ module Alf
 
         it 'should be flattenable' do
           sexpr = subject.sexpr
-          flattened = Processor::Flatten.new.call(sexpr)
+          flattened = Processor::Flatten.new(Builder.new).call(sexpr)
           if sexpr.first == :with_exp
             flattened.first.should eq(sexpr.select_exp.first)
           else

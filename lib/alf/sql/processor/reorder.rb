@@ -3,7 +3,7 @@ module Alf
     class Processor
       class Reorder < Processor
 
-        def initialize(attr_list, builder = Builder.new)
+        def initialize(attr_list, builder)
           super(builder)
           @indexes = Hash[attr_list.to_a.map(&:to_s).each_with_index.to_a]
         end

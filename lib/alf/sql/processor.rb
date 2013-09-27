@@ -3,7 +3,7 @@ module Alf
     class Processor < Sexpr::Rewriter
       grammar Sql::Grammar
 
-      def initialize(builder = Builder.new)
+      def initialize(builder)
         @builder = builder
       end
       attr_reader :builder

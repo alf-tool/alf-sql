@@ -11,7 +11,7 @@ module Alf
         }
       }
 
-      subject{ clazz.new.on_select_exp(expr) }
+      subject{ clazz.new(Builder.new).on_select_exp(expr) }
 
       let(:expr){
         Grammar.sexpr [:select_exp, distinct, select_list_ab, [:baz]]

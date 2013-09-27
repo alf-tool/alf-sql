@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Distinct do
 
-        subject{ Distinct.new.call(expr) }
+        subject{ Distinct.new(Builder.new).call(expr) }
 
         context 'on a select_exp' do
           let(:expr){ select_all }

@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Clip do
 
-        subject{ Clip.new([:a]).call(expr) }
+        subject{ Clip.new([:a], Builder.new).call(expr) }
 
         context 'on a select_exp' do
           let(:expr){ select_ab }

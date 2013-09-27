@@ -3,7 +3,7 @@ module Alf
     class Processor
       class Where < Processor
 
-        def initialize(predicate, builder = Builder.new)
+        def initialize(predicate, builder)
           super(builder)
           @predicate = predicate
         end

@@ -4,7 +4,7 @@ module Alf
     class Processor
       describe Rename do
 
-        subject{ Rename.new(Renaming[a: :b]).call(expr) }
+        subject{ Rename.new(Renaming[a: :b], Builder.new).call(expr) }
 
         context 'on a select_exp' do
           let(:expr){ select_all_a }

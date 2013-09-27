@@ -3,7 +3,7 @@ module Alf
     class Processor
       class OrderBy < Processor
 
-        def initialize(ordering, builder = Builder.new)
+        def initialize(ordering, builder)
           super(builder)
           @ordering = ordering
         end
