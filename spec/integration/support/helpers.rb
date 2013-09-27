@@ -1,7 +1,14 @@
 module Helpers
 
   def conn
-    Alf.connect(Path.dir, viewpoint: Alf::Test::Fake)
+    Alf.connect(Path.dir, viewpoint: Alf::Test::Sap::Fake)
+  end
+
+  def measure
+    t1 = Time.now
+    res = yield
+    t2 = Time.now
+    [res, (t2 - t1)]
   end
 
   def strip(x)

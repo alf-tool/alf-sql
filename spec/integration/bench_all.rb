@@ -6,37 +6,26 @@ require_relative 'support/helpers'
 
 include Helpers
 
-def measure
-  t1 = Time.now
-  res = yield
-  t2 = Time.now
-  [res, (t2 - t1)]
-end
+# ensure creation of the parser and compiler
+conn.parse("DUM")
+compiler
 
-Alf::Test.each_query_file do |file|
-  basename = file.basename.to_s
-  queries  = file.load
+Alf::Test::Sap.each_query do |query|
+  next unless query.sqlizable?
 
-  # ensure creation of the parser and compiler
-  conn.parse("DUM")
-  compiler
+  alf_expr, sql_expr = strip(query.alf), strip(query.sql)
 
-  queries.each do |query|
-    next unless query['sql']
-    alf_expr, sql_expr = strip(query['query']), strip(query['sql'])
+  ast, parsing       = measure{ conn.parse(query.alf) }
+  sql_ast, compiling = measure{ compiler.call(ast)    }
+  to_sql, printing   = measure{ sql_ast.to_sql        }
 
-    ast, parsing       = measure{ conn.parse(query['query']) }
-    sql_ast, compiling = measure{ compiler.call(ast) }
-    to_sql, printing   = measure{ sql_ast.to_sql("") }
-
-    puts Alf::Support.to_ruby_literal({
-      file: basename,
-      query: alf_expr,
-      got: sql_expr,
-      parsing: parsing,
-      compiling: compiling,
-      printing: printing,
-      total: parsing + compiling + printing
-    })
-  end
+  puts Alf::Support.to_ruby_literal({
+    category: query.category,
+    alf: alf_expr,
+    sql: sql_expr,
+    parsing: parsing,
+    compiling: compiling,
+    printing: printing,
+    total: parsing + compiling + printing
+  })
 end

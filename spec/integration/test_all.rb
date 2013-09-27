@@ -1,37 +1,22 @@
 require 'spec_helper'
 module Alf
   module Sql
-    describe "SQL compiler -- " do
+    Alf::Test::Sap.each_query do |query|
+      next unless query.sqlizable?
 
-      def self.install_sql_test_for(query)
-        describe "SQL compilation of #{query['query']}" do
+      describe "SQL compilation of #{query}" do
+        let(:expr){ conn.parse(query.alf) }
 
-          let(:expr){ conn.parse(query['query']) }
+        subject{
+          compiler.call(expr)
+        }
 
-          subject{
-            compiler.call(expr)
-          }
+        it_should_behave_like "a compiled"
 
-          it_should_behave_like "a compiled"
-
-          it 'should have expected SQL' do
-            strip(subject.to_sql).should eq(strip(query['sql']))
-          end
+        it 'should have expected SQL' do
+          strip(subject.to_sql).should eq(strip(query.sql))
         end
       end
-
-      def self.install_tests_for(queries)
-        queries.each do |query|
-          install_sql_test_for(query) if query['sql']
-        end
-      end
-
-      Alf::Test.each_query_file do |file|
-        describe "On #{file.basename}" do
-          install_tests_for(file.load)
-        end
-      end
-
     end
   end
 end
