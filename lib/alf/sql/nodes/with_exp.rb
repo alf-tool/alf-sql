@@ -27,7 +27,11 @@ module Alf
                                   :offset_clause,
                                   :desaliaser,
                                   :to_attr_list,
-                                  :to_ordering
+                                  :to_ordering,
+                                  :all?,
+                                  :distinct?,
+                                  :set_operator?,
+                                  :limit_or_offset?
 
     # to_xxx
 
