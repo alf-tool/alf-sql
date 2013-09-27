@@ -3,8 +3,8 @@ module Alf
   module Sql
     describe "SQL compiler -- " do
 
-      def self.install_test_for(query)
-        describe "#{query['query']}" do
+      def self.install_sql_test_for(query)
+        describe "SQL compilation of #{query['query']}" do
 
           let(:expr){ conn.parse(query['query']) }
 
@@ -22,7 +22,7 @@ module Alf
 
       def self.install_tests_for(queries)
         queries.each do |query|
-          install_test_for(query)
+          install_sql_test_for(query) if query['sql']
         end
       end
 

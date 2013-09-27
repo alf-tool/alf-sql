@@ -4,13 +4,13 @@ namespace :test do
   desc "Run unit tests"
   RSpec::Core::RakeTask.new(:unit) do |t|
     t.pattern = "spec/unit/**/test_*.rb"
-    t.rspec_opts = ["--color", "-Ilib", "-Ispec/unit"]
+    t.rspec_opts = ["--color", "--backtrace", "-Ilib", "-Ispec/unit"]
   end
 
   desc "Run integration tests"
   RSpec::Core::RakeTask.new(:integration) do |t|
     t.pattern = "spec/integration/**/test_*.rb"
-    t.rspec_opts = ["--color", "-Ilib", "-Ispec/integration"]
+    t.rspec_opts = ["--color", "--backtrace", "-Ilib", "-Ispec/integration"]
   end
   
 end

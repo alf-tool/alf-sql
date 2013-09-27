@@ -1,7 +1,7 @@
 require 'alf-core'
+require 'alf-test'
 require 'alf-sql'
 
-require_relative 'support/viewpoint'
 require_relative 'support/helpers'
 
 include Helpers
@@ -13,7 +13,7 @@ def measure
   [res, (t2 - t1)]
 end
 
-Path.dir.glob('*.yml').each do |file|
+Alf::Test.each_query_file do |file|
   basename = file.basename.to_s
   queries  = file.load
 
@@ -22,6 +22,7 @@ Path.dir.glob('*.yml').each do |file|
   compiler
 
   queries.each do |query|
+    next unless query['sql']
     alf_expr, sql_expr = strip(query['query']), strip(query['sql'])
 
     ast, parsing       = measure{ conn.parse(query['query']) }
