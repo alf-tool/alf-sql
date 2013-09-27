@@ -81,9 +81,9 @@ module Alf
         rewrite(compiled, expr, Processor::Where, [expr.predicate])
       end
 
-      def on_summarize(expr, compiled)
-        # -> SQL's GROUP-BY
-      end
+      # def on_summarize(expr, compiled)
+      #   # -> SQL's GROUP-BY
+      # end
 
       def on_union(expr, left, right)
         rewrite(left, expr, Processor::Merge, [:union, right.sexpr])
