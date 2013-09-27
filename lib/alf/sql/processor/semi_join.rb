@@ -11,6 +11,16 @@ module Alf
         end
         attr_reader :right, :negate
 
+        def call(sexpr)
+          if sexpr.set_operator?
+            call(builder.from_self(sexpr))
+          elsif right.set_operator?
+            SemiJoin.new(builder.from_self(right), negate, builder).call(sexpr)
+          else
+            super(sexpr)
+          end
+        end
+
       private
 
         def apply_join_strategy(left, right)
