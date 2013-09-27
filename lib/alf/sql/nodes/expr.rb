@@ -31,6 +31,10 @@ module Alf
         not(limit_clause.nil? and offset_clause.nil?)
       end
 
+      def join?
+        false
+      end
+
       def ordering
         obc = order_by_clause
         obc && order_by_clause.to_ordering

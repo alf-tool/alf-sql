@@ -9,6 +9,10 @@ module Alf
         last
       end
 
+      def join?
+        table_spec.join?
+      end
+
       def to_sql(buffer = "")
         buffer << FROM << SPACE
         last.to_sql(buffer)

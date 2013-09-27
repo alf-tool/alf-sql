@@ -23,6 +23,10 @@ module Alf
         set_quantifier.all?
       end
 
+      def join?
+        from_clause && from_clause.join?
+      end
+
       def select_exp
         self
       end

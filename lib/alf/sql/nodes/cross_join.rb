@@ -3,6 +3,10 @@ module Alf
     module CrossJoin
       include Expr
 
+      def join?
+        true
+      end
+
       def left
         self[1]
       end

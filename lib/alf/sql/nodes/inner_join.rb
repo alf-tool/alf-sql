@@ -7,6 +7,10 @@ module Alf
       JOIN  = "JOIN".freeze
       ON    = "ON".freeze
 
+      def join?
+        true
+      end
+
       def left
         self[1]
       end

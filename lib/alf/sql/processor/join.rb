@@ -32,7 +32,7 @@ module Alf
         end
 
         def unjoinable?(sexpr)
-          sexpr.set_operator? or sexpr.limit_or_offset?
+          sexpr.set_operator? or sexpr.limit_or_offset? or sexpr.join?
         end
 
         def join_set_quantifiers(left, right)
