@@ -10,10 +10,6 @@ module Alf
       end
       attr_reader :sexpr
 
-      def rewrite(processor, traceability = self.expr, compiler = self.compiler)
-        Cog.new(traceability, compiler, processor.call(@sexpr))
-      end
-
       def cog_orders
         [ sexpr.ordering ].compact
       end

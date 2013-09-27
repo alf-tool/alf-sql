@@ -10,7 +10,7 @@ module Alf
       ### base
 
       def on_leaf_operand(expr, &fallback)
-        Cog.new(expr, self, builder.select_all(expr.heading, expr.name))
+        fresh_cog(expr, builder.select_all(expr.heading, expr.name))
       end
 
       ### non-relational
@@ -89,10 +89,15 @@ module Alf
         rewrite(left, expr, Processor::Merge, [:union, right.sexpr])
       end
 
-    private
+    protected
+
+      def fresh_cog(expr, sexpr)
+        Cog.new(expr, self, sexpr)
+      end
 
       def rewrite(compiled, expr, processor, args = [])
-        compiled.rewrite(processor.new(*args.push(builder)), expr, self)
+        rewrited = processor.new(*args.push(builder)).call(compiled.sexpr)
+        Cog.new(expr, self, rewrited)
       end
 
       def rebind(compiled, expr)
