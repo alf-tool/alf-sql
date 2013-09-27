@@ -3,6 +3,14 @@ module Alf
     module TableAs
       include Expr
 
+      def table_name
+        self[1].last
+      end
+
+      def as_name
+        self[2].last
+      end
+
       def to_sql(buffer = "")
         self[1].to_sql(buffer)
         buffer << " AS "

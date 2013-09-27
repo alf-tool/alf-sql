@@ -3,6 +3,10 @@ module Alf
     module TableName
       include Expr
 
+      def value
+        last
+      end
+
       def to_sql(buffer = "")
         buffer << last.to_s
         buffer

@@ -6,7 +6,7 @@ module Alf
       STAR = "*".freeze
 
       def to_sql(buffer = "")
-        buffer << SPACE << STAR << SPACE
+        buffer << STAR
         buffer
       end
 

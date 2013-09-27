@@ -2,10 +2,18 @@ module Alf
   class Predicate
     module In
 
+      def subquery?
+        Sql::Expr === last
+      end
+
+      def subquery
+        subquery? ? last : nil
+      end
+
       def to_sql(buffer = "")
         identifier.to_sql(buffer)
         buffer << Sql::Expr::SPACE << Sql::Expr::IN << Sql::Expr::SPACE
-        if values.respond_to?(:to_sql)
+        if subquery?
           values.to_sql(buffer)
         else
           buffer << Sql::Expr::LEFT_PARENTHESE

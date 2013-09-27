@@ -69,9 +69,10 @@ module Alf
                 when String, Symbol then table_name(table)
                 else table
                 end
-        [:table_as,
-          table,
-          range_var_name(qualifier) ]
+        Grammar.sexpr \
+          [:table_as,
+            table,
+            range_var_name(qualifier) ]
       end
 
       def qualified_name(qualifier, name)

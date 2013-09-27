@@ -3,6 +3,14 @@ module Alf
     module CrossJoin
       include Expr
 
+      def left
+        self[1]
+      end
+
+      def right
+        self[2]
+      end
+
       def to_sql(buffer = "")
         each_child do |child, index|
           buffer << COMMA << SPACE unless index == 0

@@ -15,7 +15,7 @@ module Alf
         self[2]
       end
 
-      def join_condition
+      def predicate
         last
       end
 
@@ -24,7 +24,7 @@ module Alf
         buffer << SPACE << JOIN << SPACE
         right.to_sql(buffer)
         buffer << SPACE << ON << SPACE
-        join_condition.to_sql(buffer)
+        predicate.to_sql(buffer)
         buffer
       end
 

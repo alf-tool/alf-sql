@@ -3,12 +3,16 @@ module Alf
     module OrderByTerm
       include Expr
 
+      def qualified_name
+        self[1]
+      end
+
       def qualifier
-        self[1].qualifier
+        qualified_name.qualifier
       end
 
       def as_name
-        self[1].as_name
+        qualified_name.as_name
       end
 
       def direction

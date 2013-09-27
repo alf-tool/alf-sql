@@ -3,10 +3,18 @@ module Alf
     module NameIntro
       include Expr
 
+      def table_name
+        self[1]
+      end
+
+      def subquery
+        self[2]
+      end
+
       def to_sql(buffer = "")
-        self[1].to_sql(buffer)
+        table_name.to_sql(buffer)
         buffer << SPACE << AS << SPACE
-        self[2].to_sql(buffer, true)
+        subquery.to_sql(buffer, true)
         buffer
       end
 
