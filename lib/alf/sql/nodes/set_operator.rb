@@ -1,7 +1,15 @@
 module Alf
   module Sql
-    module Nadic
+    module SetOperator
       include Expr
+
+      def left
+        self[2]
+      end
+
+      def right
+        self[3]
+      end
 
       def set_quantifier
         self[1]
@@ -11,7 +19,7 @@ module Alf
         false
       end
 
-      def nadic?
+      def set_operator?
         true
       end
 
@@ -35,20 +43,18 @@ module Alf
         if parenthesize
           sql_parenthesized(buffer){|b| to_sql(b, false) }
         else
-          between = "" << SPACE << keyword
+          left.to_sql(buffer, true)
+          buffer << SPACE << keyword
           unless distinct?
-            between << SPACE
-            set_quantifier.to_sql(between)
+            buffer << SPACE
+            set_quantifier.to_sql(buffer)
           end
-          between << SPACE
-          each_child(1) do |child, index|
-            buffer << between unless index==1
-            child.to_sql(buffer, true)
-          end
+          buffer << SPACE
+          right.to_sql(buffer, true)
           buffer
         end
       end
 
-    end # module Nadic
+    end # module SetOperator
   end # module Sql
 end # module Alf

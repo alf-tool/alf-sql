@@ -15,8 +15,7 @@ module Alf
   end # module Sql
 end # module Alf
 require_relative "nodes/expr"
-require_relative "nodes/nadic"
-
+require_relative "nodes/set_operator"
 require_relative "nodes/literal"
 require_relative "nodes/column_name"
 require_relative "nodes/qualified_name"

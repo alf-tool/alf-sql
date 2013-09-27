@@ -1,7 +1,7 @@
 module Alf
   module Sql
     module Intersect
-      include Nadic
+      include SetOperator
 
       INTERSECT = "INTERSECT".freeze
 

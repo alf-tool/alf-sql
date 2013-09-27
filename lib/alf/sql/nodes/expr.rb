@@ -23,7 +23,7 @@ module Alf
       IN               = "IN".freeze
       EXISTS           = "EXISTS".freeze
 
-      def nadic?
+      def set_operator?
         false
       end
 

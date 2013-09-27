@@ -1,7 +1,7 @@
 require 'spec_helper'
 module Alf
   module Sql
-    describe Processor, "on_nadic" do
+    describe Processor, "on_set_operator" do
 
       let(:clazz){
         Class.new(Processor){
@@ -11,7 +11,7 @@ module Alf
         }
       }
 
-      subject{ clazz.new.on_nadic(expr) }
+      subject{ clazz.new.on_set_operator(expr) }
 
       let(:expr){
         [:union, all, select_all_a, select_all_b]

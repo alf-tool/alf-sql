@@ -1,7 +1,7 @@
 module Alf
   module Sql
     module Union
-      include Nadic
+      include SetOperator
 
       UNION = "UNION".freeze
 

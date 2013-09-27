@@ -12,14 +12,14 @@ module Alf
         sexpr.with_update(-1, apply(sexpr.select_exp))
       end
 
-      def on_nadic(sexpr)
+      def on_set_operator(sexpr)
         sexpr.each_with_index.map{|child,index|
           index <= 1 ? child : apply(child)
         }
       end
-      alias :on_union     :on_nadic
-      alias :on_except    :on_nadic
-      alias :on_intersect :on_nadic
+      alias :on_union     :on_set_operator
+      alias :on_except    :on_set_operator
+      alias :on_intersect :on_set_operator
 
       def on_select_exp(sexpr)
         sexpr.with_update(2, apply(sexpr[2]))

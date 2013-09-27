@@ -1,7 +1,7 @@
 module Alf
   module Sql
     module Except
-      include Nadic
+      include SetOperator
 
       EXCEPT = "EXCEPT".freeze
 
