@@ -11,6 +11,14 @@ module Alf
         buffer
       end
 
+      def to_hash
+        hash = {}
+        each_child do |child|
+          hash[child.table_name.value] = child.subquery
+        end
+        hash
+      end
+
     end # module WithSpec
   end # module Sql
 end # module Alf

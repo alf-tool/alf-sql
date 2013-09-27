@@ -39,7 +39,7 @@ module Alf
         self.last.to_attr_list
       end
 
-      def to_sql(buffer, parenthesize = !buffer.empty?)
+      def to_sql(buffer = "", parenthesize = !buffer.empty?)
         if parenthesize
           sql_parenthesized(buffer){|b| to_sql(b, false) }
         else

@@ -60,9 +60,12 @@ rules:
     - [ scalar_exp, column_name ]
   table_spec:
     - table_as
+    - subquery_as
     - join_exp
   table_as:
     - [ table_name, range_var_name ]
+  subquery_as:
+    - [ nonjoin_exp, range_var_name ]
   scalar_exp:
     - qualified_name
     - column_name

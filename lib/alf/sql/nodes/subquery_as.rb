@@ -1,18 +1,15 @@
 module Alf
   module Sql
-    module TableAs
+    module SubqueryAs
       include Expr
 
       def left
         self[1]
       end
+      alias :subquery :left
 
       def right
         self[2]
-      end
-
-      def table_name
-        self[1].last
       end
 
       def as_name
@@ -20,12 +17,12 @@ module Alf
       end
 
       def to_sql(buffer = "")
-        self[1].to_sql(buffer)
+        left.to_sql(buffer)
         buffer << " AS "
-        self[2].to_sql(buffer)
+        right.to_sql(buffer)
         buffer
       end
 
-    end # module TableAs
+    end # module SubqueryAs
   end # module Sql
 end # module Alf
