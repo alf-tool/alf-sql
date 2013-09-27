@@ -1,9 +1,4 @@
-require 'alf-core'
-require 'alf-test'
-require 'alf-sql'
-
-require_relative 'support/helpers'
-
+require_relative 'spec_helper'
 include Helpers
 
 # ensure creation of the parser and compiler
