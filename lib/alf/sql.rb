@@ -1,4 +1,5 @@
 require_relative 'predicate/nodes'
+require_relative 'algebra/operand'
 
 require_relative 'sql/version'
 require_relative 'sql/loader'
