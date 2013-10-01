@@ -13,7 +13,6 @@ module Alf
       def all
         Grammar.sexpr [:set_quantifier, "all"]
       end
-      alias :not_distinct :all
 
       def name_intro(name, sexpr)
         Grammar.sexpr \

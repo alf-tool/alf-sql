@@ -228,7 +228,6 @@ module Helpers
     def all
       [:set_quantifier, "all"]
     end
-    alias :not_distinct :all
 
   end
   include Ast

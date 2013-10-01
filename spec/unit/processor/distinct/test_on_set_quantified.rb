@@ -20,7 +20,7 @@ module Alf
 
         context 'when not distinct' do
           let(:expr){
-            Grammar.sexpr [:x, not_distinct]
+            Grammar.sexpr [:x, all]
           }
 
           it{ should eq(expected) }
