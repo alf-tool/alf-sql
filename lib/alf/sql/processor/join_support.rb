@@ -12,20 +12,6 @@ module Alf
 
       private
 
-        def merge_with_exps(left, right, joined)
-          if left.with_exp? and right.with_exp?
-            [:with_exp,
-              left.with_spec + right.with_spec.sexpr_body,
-              joined ]
-          elsif left.with_exp?
-            left.with_update(-1, joined)
-          elsif right.with_exp?
-            right.with_update(-1, joined)
-          else
-            joined
-          end
-        end
-
         def join_predicate(left, right, commons = left.to_attr_list & right.to_attr_list)
           commons = left.to_attr_list & right.to_attr_list
           left_d, right_d = left.desaliaser, right.desaliaser

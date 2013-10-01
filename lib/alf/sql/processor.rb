@@ -9,7 +9,8 @@ module Alf
       attr_reader :builder
 
       def on_with_exp(sexpr)
-        sexpr.with_update(-1, apply(sexpr.select_exp))
+        applied = apply(sexpr.select_exp)
+        merge_with_exps(sexpr, applied, applied.select_exp)
       end
 
       def on_set_operator(sexpr)
@@ -26,6 +27,20 @@ module Alf
       end
 
     private
+
+      def merge_with_exps(left, right, main)
+        if left.with_exp? and right.with_exp?
+          [:with_exp,
+            left.with_spec + right.with_spec.sexpr_body,
+            main ]
+        elsif left.with_exp?
+          left.with_update(-1, main)
+        elsif right.with_exp?
+          right.with_update(-1, main)
+        else
+          main
+        end
+      end
 
       def tautology
         Predicate::Factory.tautology
