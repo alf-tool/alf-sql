@@ -2,6 +2,10 @@ template-info:
   name: alf.noe
   version: 0.1.0
   manifest:
+    spec/spec_helper.rb:
+      ignore: true
+    spec/test___lower__.rb:
+      ignore: true
     tasks/test.rake:
       safe-override: false
     Gemfile:
@@ -12,7 +16,7 @@ variables:
   upper:
     Sql
   version:
-    0.14.0
+    0.15.0
   summary:
     An abstract SQL compiler for Alf expressions 
   description: |-
@@ -23,8 +27,9 @@ variables:
     - http://github.com/blambeau/alf-sql
     - http://github.com/blambeau/alf
   dependencies:
-    - {name: alf-core,  version: "~> 0.14.0", groups: [runtime]}
+    - {name: alf-core,  version: "~> 0.15.0", groups: [runtime]}
     - {name: sexpr,     version: "~> 0.6.0",  groups: [runtime]}
-    - {name: alf-test,  version: "~> 0.14.0", groups: [development]}
+    - {name: alf-test,  version: "~> 0.15.0", groups: [development]}
+    - {name: alf-shell, version: "~> 0.15.0", groups: [development]}
     - {name: rake,      version: "~> 10.1",   groups: [development]}
     - {name: rspec,     version: "~> 2.14",   groups: [development]}
