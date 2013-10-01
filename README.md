@@ -13,8 +13,10 @@ http://github.com/blambeau/alf
 ## Synopsis
 
 This sub-module provides an abstract SQL compiler for Alf expressions. It is
-aimed at being used with a concrete translator for converting the resulting
-SQL abstract syntax tree to a concrete SQL dialect.
+NOT aimed at being used by end-users (the API illustrated below is considered
+private and may change at any time). Instead, it provides a basis for concrete
+translators converting the resulting SQL abstract syntax tree to a concrete SQL
+dialect through third-party libraries.
 
 See [alf-sequel](https://github.com/alf-tool/alf-sequel) for a translator built
 on top of [Sequel](http://sequel.rubyforge.org/).
