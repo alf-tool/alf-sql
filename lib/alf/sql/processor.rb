@@ -10,7 +10,11 @@ module Alf
 
       def on_with_exp(sexpr)
         applied = apply(sexpr.select_exp)
-        merge_with_exps(sexpr, applied, applied.select_exp)
+        if applied.with_exp?
+          merge_with_exps(sexpr, applied, applied.select_exp)
+        else
+          sexpr.with_update(-1, applied)
+        end
       end
 
       def on_set_operator(sexpr)
