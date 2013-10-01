@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/alf-tool/alf-test.git
-  revision: 43598f312e3f1372bd2536c2312f7bcfe4fc1dc1
+  revision: fd05d306fe8add7844074dd79c29862e200a3b16
   specs:
     alf-test (0.15.0)
       alf-core (~> 0.15.0)
