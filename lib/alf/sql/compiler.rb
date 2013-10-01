@@ -2,15 +2,14 @@ module Alf
   module Sql
     class Compiler < Alf::Compiler
 
-      def initialize
-        @builder = Builder.new
+      def join(plan)
+        Builder.new
       end
-      attr_reader :builder
 
       ### base
 
       def on_leaf_operand(plan, expr, &fallback)
-        fresh_cog(expr, builder.select_all(expr.heading, expr.name))
+        fresh_cog(expr, builder(plan).select_all(expr.heading, expr.name))
       end
 
       ### non-relational
@@ -95,17 +94,26 @@ module Alf
 
     protected
 
+      def builder(plan)
+        plan.options(self)
+      end
+
+      def cog_class
+        Cog
+      end
+
       def fresh_cog(expr, sexpr)
-        Cog.new(expr, self, sexpr)
+        cog_class.new(expr, self, sexpr)
       end
 
       def rewrite(plan, expr, compiled, processor, args = [])
+        builder  = builder(plan)
         rewrited = processor.new(*args.push(builder)).call(compiled.sexpr)
-        Cog.new(expr, self, rewrited)
+        cog_class.new(expr, self, rewrited)
       end
 
       def rebind(plan, expr, compiled)
-        Cog.new(expr, self, compiled.sexpr)
+        cog_class.new(expr, self, compiled.sexpr)
       end
 
     end # class Compilable

@@ -4,7 +4,6 @@ module Alf
       include Alf::Compiler::Cog
 
       def initialize(expr, compiler, sexpr)
-        raise ArgumentError unless Expr===sexpr
         super(expr, compiler)
         @sexpr = sexpr
       end
