@@ -8,7 +8,7 @@ module Alf
 
       ### base
 
-      def on_leaf_operand(plan, expr, &fallback)
+      def on_leaf_operand(plan, expr)
         fresh_cog(expr, builder(plan).select_all(expr.heading, expr.name))
       end
 
@@ -29,7 +29,7 @@ module Alf
       ### relational
 
       def on_frame(plan, expr, compiled)
-        compiled = plan.compile{|p|
+        compiled = plan.recompile(compiled){|p|
           p.sort(expr.operand, expr.total_ordering)
         }
         rewrite(plan, expr, compiled, Processor::LimitOffset, [expr.limit, expr.offset])
@@ -57,7 +57,7 @@ module Alf
 
       def on_page(plan, expr, compiled)
         index, size = expr.page_index, expr.page_size
-        compiled = plan.compile{|p|
+        compiled = plan.recompile(compiled){|p|
           ordering = expr.total_ordering
           ordering = ordering.reverse if index < 0
           p.sort(expr.operand, ordering)
@@ -66,7 +66,7 @@ module Alf
       end
 
       def on_project(plan, expr, compiled)
-        compiled = plan.compile{|p|
+        compiled = plan.recompile(compiled){|p|
           p.clip(expr.operand, expr.stay_attributes)
         }
         preserving = expr.key_preserving? rescue false
