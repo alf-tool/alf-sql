@@ -55,9 +55,6 @@ module Alf
       builder :is_table_dee
 
       def select_list(heading, qualifier)
-        unless heading.respond_to?(:to_attr_list)
-          raise "Unable to find attribute list on `#{heading.inspect}`"
-        end
         attrs = heading.to_attr_list.to_a
         attrs.map{|a| select_item(qualifier, a) }.unshift(:select_list)
       end
