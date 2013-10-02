@@ -7,9 +7,9 @@ An abstract SQL compiler for Alf expressions
 
 ## Links
 
-* http://github.com/alf-tool/alf
-* http://github.com/alf-tool/alf-sql
-* http://github.com/alf-tool/alf-sequel
+* [http://github.com/alf-tool/alf](http://github.com/alf-tool/alf#synopsis)
+* [http://github.com/alf-tool/alf-sql](http://github.com/alf-tool/alf-sql#synopsis)
+* [http://github.com/alf-tool/alf-sequel](http://github.com/alf-tool/alf-sequel#synopsis)
 
 ## Synopsis
 
