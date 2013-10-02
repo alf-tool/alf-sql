@@ -70,6 +70,10 @@ module Helpers
       sexpr [:select_exp, all, select_star, from_clause]
     end
 
+    def select_all_from_t1_as_t2
+      sexpr [:select_exp, all, select_list_t2, from_clause_t1_as_t2]
+    end
+
     def select_all_t2
       sexpr [:select_exp, all, select_list_t2, from_clause_t2]
     end
@@ -190,6 +194,10 @@ module Helpers
 
     def from_clause_t2
       sexpr [:from_clause, [:table_as, [:table_name, "t2"], [:range_var_name, "t2"]]]
+    end
+
+    def from_clause_t1_as_t2
+      sexpr [:from_clause, [:table_as, [:table_name, "t1"], [:range_var_name, "t2"]]]
     end
 
     def from_clause_t3
