@@ -6,6 +6,22 @@ module Alf
         Builder.new
       end
 
+      def supports_reuse?
+        true
+      end
+
+      def reuse(plan, cog)
+        rewrite(plan, cog.expr, cog, Processor::Requalify, [])
+      end
+
+      def compile(plan, expr, compiled, usage_count)
+        cog = super
+        if (usage_count > 1) and cog.should_be_reused?
+          cog = rewrite(plan, cog.expr, cog, Processor::FromSelf, [])
+        end
+        cog
+      end
+
       ### base
 
       def on_leaf_operand(plan, expr)

@@ -14,6 +14,10 @@ module Alf
         [ sexpr.ordering ].compact
       end
 
+      def should_be_reused?
+        sexpr.should_be_reused?
+      end
+
       def to_sql(buffer = "")
         sexpr.to_sql(buffer)
       end

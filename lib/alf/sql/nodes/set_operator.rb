@@ -31,6 +31,10 @@ module Alf
         set_quantifier.all?
       end
 
+      def should_be_reused?
+        true
+      end
+
       def order_by_clause
         nil
       end

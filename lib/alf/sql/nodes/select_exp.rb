@@ -27,6 +27,14 @@ module Alf
         from_clause && from_clause.join?
       end
 
+      def should_be_reused?
+        join? or distinct? or complex_clause?
+      end
+
+      def complex_clause?
+        where_clause or order_by_clause or limit_clause or offset_clause
+      end
+
       def select_exp
         self
       end

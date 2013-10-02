@@ -32,7 +32,8 @@ module Alf
                                   :distinct?,
                                   :set_operator?,
                                   :limit_or_offset?,
-                                  :join?
+                                  :join?,
+                                  :should_be_reused?
 
     # to_xxx
 
