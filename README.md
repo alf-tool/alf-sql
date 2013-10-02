@@ -22,7 +22,7 @@ dialect through third-party libraries.
 See [alf-sequel](https://github.com/alf-tool/alf-sequel) for a translator built
 on top of [Sequel](http://sequel.rubyforge.org/).
 
-## Example:
+## Example
 
 ```ruby
 require 'alf-sql'
@@ -30,7 +30,9 @@ require 'alf-test' # this gem comes with the suppliers and parts (Sap) examplar
 
 Alf::Test::Sap.connect(:fake) do |conn|
   # Let parse some relational expression
-  expr = conn.parse{ restrict(suppliers, city: 'London') }
+  expr = conn.parse{
+    restrict(suppliers, city: 'London')
+  }
 
   # Translate to SQL
   # (non-portable SQL output unless you require alf-sequel as well)
