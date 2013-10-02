@@ -10,17 +10,19 @@ Alf::Test::Sap.each_query do |query|
 
   alf_expr, sql_expr = strip(query.alf), strip(query.sql)
 
-  ast, parsing       = measure{ conn.parse(query.alf) }
-  sql_ast, compiling = measure{ compiler.call(ast)    }
-  to_sql, printing   = measure{ sql_ast.to_sql        }
+  10.times do
+    ast, parsing       = measure{ conn.parse(query.alf) }
+    sql_ast, compiling = measure{ compiler.call(ast)    }
+    to_sql, printing   = measure{ sql_ast.to_sql        }
 
-  puts Alf::Support.to_ruby_literal({
-    category: query.category,
-    alf: alf_expr,
-    sql: sql_expr,
-    parsing: parsing,
-    compiling: compiling,
-    printing: printing,
-    total: parsing + compiling + printing
-  })
+    puts Alf::Support.to_ruby_literal({
+      category: query.category,
+      alf: alf_expr,
+      sql: sql_expr,
+      parsing: parsing,
+      compiling: compiling,
+      printing: printing,
+      total: parsing + compiling + printing
+    })
+  end
 end
