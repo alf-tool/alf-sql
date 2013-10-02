@@ -25,7 +25,7 @@ namespace :bench do
   task :rank do
     cmd = bench_cmd
     cmd << " | "
-    cmd << alf_cmd("summarize -- category alf -- parsing 'avg{ parsing }' compiling 'avg{ compiling }' printing 'avg{ printing }' total 'avg{ total }'")
+    cmd << alf_cmd("summarize -- category alf -- parsing 'avg{ parsing }' compiling 'avg{ compiling }' translating 'avg{ translating }' printing 'avg{ printing }' total 'avg{ total }'")
     cmd << " | "
     cmd << alf_cmd("rank -- total desc -- position")
     cmd << " | "
