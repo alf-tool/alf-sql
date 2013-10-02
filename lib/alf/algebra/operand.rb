@@ -4,10 +4,13 @@ module Alf
 
       def to_sql
         cog = to_cog
-        unless cog.respond_to?(:to_sql)
-          raise NotSupportedError, "Unable to compile `#{self}` to SQL"
+        if cog.respond_to?(:to_sql)
+          cog.to_sql
+        else
+          Alf::Sql::Compiler.new.call(self).to_sql
         end
-        cog.to_sql
+      rescue NotSupportedError => ex
+        raise NotSupportedError, "Unable to compile `#{self}` to SQL"
       end
 
     end # module Operand

@@ -8,6 +8,7 @@ module Alf
         @sexpr = sexpr
       end
       attr_reader :sexpr
+      alias :to_sexpr :sexpr
 
       def cog_orders
         [ sexpr.ordering ].compact
@@ -15,6 +16,11 @@ module Alf
 
       def to_sql(buffer = "")
         sexpr.to_sql(buffer)
+      end
+
+      def each(&bl)
+        raise NotSupportedError,\
+          "This is an abstract SQL compilation result. Please use alf-sequel."
       end
 
     end # module Cog

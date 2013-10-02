@@ -28,19 +28,22 @@ require 'alf-sql'
 require 'alf-test' # this gem comes with the suppliers and parts (Sap) examplar
 
 Alf::Test::Sap.connect(:fake) do |conn|
+  # Let parse some relational expression
   expr = conn.parse{ restrict(suppliers, city: 'London') }
 
-  # Compile to an abstract cog
-  cog = Alf::Sql::Compiler.new.call(expr)
-
-  # Let see the SQL AST
-  puts cog.sexpr.inspect
-  # => [ :select_exp, [:select_list, ...] ]
-
-  # Translate to SQL (non-portable SQL output, see alf-sequel instead)
-  puts cog.to_sql
+  # Translate to SQL
+  # (non-portable SQL output unless you require alf-sequel as well)
+  puts expr.to_sql
   # => SELECT t1.sid, t1.name, t1.status, t1.city
   #      FROM suppliers AS t1
   #     WHERE t1.city = 'London'
+
+  # Alternatively (for translator implementers),
+  # compile to an abstract cog (cannot be iterated)
+  cog = Alf::Sql::Compiler.new.call(expr)
+
+  # Let see the SQL AST
+  puts cog.to_sexpr.inspect
+  # => [ :select_exp, [:select_list, ...] ]
 end
 ```
