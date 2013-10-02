@@ -12,9 +12,8 @@ module Alf
         def on_with_exp(sexpr)
           if @right.with_exp?
             reordered = Reorder.new(sexpr.to_attr_list, builder).call(@right)
-            [ :with_exp,
-              sexpr.with_spec + reordered.with_spec.sexpr_body,
-              [ @kind, builder.distinct, sexpr.select_exp, reordered.select_exp ] ]
+            main = [ @kind, builder.distinct, sexpr.select_exp, reordered.select_exp ]
+            merge_with_exps(sexpr, reordered, main)
           else
             [ :with_exp,
               sexpr.with_spec,

@@ -34,8 +34,8 @@ module Alf
 
       def merge_with_exps(left, right, main)
         if left.with_exp? and right.with_exp?
-          [:with_exp,
-            left.with_spec + right.with_spec.sexpr_body,
+          [ :with_exp,
+            merge_with_specs(left.with_spec, right.with_spec),
             main ]
         elsif left.with_exp?
           left.with_update(-1, main)
@@ -44,6 +44,14 @@ module Alf
         else
           main
         end
+      end
+
+      def merge_with_specs(left, right)
+        hash = left.to_hash.merge(right.to_hash){|k,v1,v2|
+          raise "Unexpected different SQL expr" unless v1 == v2
+          v1
+        }
+        hash.map{|(k,v)| builder.name_intro(k,v) }.unshift(:with_spec)
       end
 
       def tautology
