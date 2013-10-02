@@ -2,6 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/alf-tool/alf-sql.png)](http://travis-ci.org/alf-tool/alf-sql)
 [![Dependency Status](https://gemnasium.com/alf-tool/alf-sql.png)](https://gemnasium.com/alf-tool/alf-sql)
+[![Code Climate](https://codeclimate.com/github/alf-tool/alf-sql.png)](https://codeclimate.com/github/alf-tool/alf-sql)
 
 An abstract SQL compiler for Alf expressions
 
