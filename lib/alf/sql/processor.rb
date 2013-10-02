@@ -3,6 +3,8 @@ module Alf
     class Processor < Sexpr::Rewriter
       grammar Sql::Grammar
 
+      UnexpectedError = Class.new(Alf::Error)
+
       def initialize(builder)
         @builder = builder
       end
@@ -48,7 +50,11 @@ module Alf
 
       def merge_with_specs(left, right)
         hash = left.to_hash.merge(right.to_hash){|k,v1,v2|
-          raise "Unexpected different SQL expr" unless v1 == v2
+          unless v1 == v2
+            msg = "Unexpected different SQL expr: "
+            msg << "`#{v1.to_sql}` vs. `#{v2.to_sql}`"
+            raise UnexpectedError, msg
+          end
           v1
         }
         hash.map{|(k,v)| builder.name_intro(k,v) }.unshift(:with_spec)
