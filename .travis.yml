@@ -1,13 +1,16 @@
 language: ruby
 bundler_args: --without=release doc extra
-script: "bundle exec rake"
 rvm:
   - 1.9.2
   - 1.9.3
   - 2.0.0
-  - jruby-19mode
   - ruby-head
+  - jruby-19mode
   - jruby-head
-notifications:
-  email:
-    - blambeau@gmail.com
+  - rbx-19mode
+  - rbx-head
+matrix:
+  allow_failures:
+    - rvm: rbx-19mode
+    - rvm: rbx-head
+    - rvm: ruby-head
