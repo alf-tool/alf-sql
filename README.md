@@ -27,9 +27,8 @@ on top of [Sequel](http://sequel.rubyforge.org/).
 
 ```ruby
 require 'alf-sql'
-require 'alf-test' # this gem comes with the suppliers and parts (Sap) examplar
 
-Alf::Test::Sap.connect(:fake) do |conn|
+Alf.connect("sap.db") do |conn|
   # Let parse some relational expression
   expr = conn.parse{
     restrict(suppliers, city: 'London')
