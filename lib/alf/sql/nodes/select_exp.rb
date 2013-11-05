@@ -15,6 +15,10 @@ module Alf
         false
       end
 
+      def is_table_dee?
+        from_clause.nil? && select_list.is_table_dee?
+      end
+
       def distinct?
         set_quantifier.distinct?
       end

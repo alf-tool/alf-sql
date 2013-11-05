@@ -28,7 +28,7 @@ module Helpers
       sexpr [:intersect, distinct, left, right]
     end
 
-    def select_is_table_dee(where)
+    def select_is_table_dee(where = nil)
       exists = Alf::Predicate::Grammar.sexpr([:exists, where])
       sexpr [:select_exp, all,
               [:select_list,

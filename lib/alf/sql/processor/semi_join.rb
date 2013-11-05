@@ -24,19 +24,27 @@ module Alf
       private
 
         def apply_join_strategy(left, right)
-          commons  = left.to_attr_list & right.to_attr_list
-          subquery = Clip.new(commons, :star, builder).call(right)
-          if commons.size == 0
-            predicate = builder.exists(subquery)
-          elsif commons.size == 1
-            identifier = left.desaliaser[commons.to_a.first]
-            predicate  = Predicate::Factory.in(identifier, subquery)
-          else
-            join_pre  = join_predicate(left, subquery, commons)
-            subquery  = expand_where_clause(subquery, join_pre)
-            predicate = builder.exists(subquery)
-          end
+          predicate = build_semijoin_predicate(left, right)
           expand_where_clause(left, negate ? !predicate : predicate)
+        end
+
+        def build_semijoin_predicate(left, right)
+          if right.is_table_dee?
+            right.where_clause.predicate
+          else
+            commons  = left.to_attr_list & right.to_attr_list
+            subquery = Clip.new(commons, :star, builder).call(right)
+            if commons.size == 0
+              builder.exists(subquery)
+            elsif commons.size == 1
+              identifier = left.desaliaser[commons.to_a.first]
+              Predicate::Factory.in(identifier, subquery)
+            else
+              join_pre  = join_predicate(left, subquery, commons)
+              subquery  = expand_where_clause(subquery, join_pre)
+              builder.exists(subquery)
+            end
+          end
         end
 
         def expand_where_clause(sexpr, predicate)

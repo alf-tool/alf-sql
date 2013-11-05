@@ -10,6 +10,10 @@ module Alf
         }
       end
 
+      def is_table_dee?
+        Builder::IS_TABLE_DEE == self
+      end
+
       def knows?(as_name)
         find_child{|child| child.as_name == as_name }
       end

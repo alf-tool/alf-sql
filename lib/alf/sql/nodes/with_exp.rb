@@ -33,7 +33,8 @@ module Alf
                                   :set_operator?,
                                   :limit_or_offset?,
                                   :join?,
-                                  :should_be_reused?
+                                  :should_be_reused?,
+                                  :is_table_dee?
 
     # to_xxx
 

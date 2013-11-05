@@ -23,6 +23,10 @@ module Alf
         true
       end
 
+      def is_table_dee?
+        false
+      end
+
       def distinct?
         set_quantifier.distinct?
       end

@@ -56,7 +56,13 @@ module Alf
       end
 
       def on_join(plan, expr, left, right)
-        rewrite(plan, expr, left, Processor::Join, [right.sexpr])
+        if right.sexpr.is_table_dee?
+          rewrite(plan, expr, left, Processor::SemiJoin, [right.sexpr, false])
+        elsif left.sexpr.is_table_dee?
+          rewrite(plan, expr, right, Processor::SemiJoin, [left.sexpr, false])
+        else
+          rewrite(plan, expr, left, Processor::Join, [right.sexpr])
+        end
       end
 
       def on_matching(plan, expr, left, right)
