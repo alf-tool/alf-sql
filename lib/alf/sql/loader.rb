@@ -1,2 +1,2 @@
-require "alf-core"
 require "sexpr"
+require "alf-core"
