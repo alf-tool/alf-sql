@@ -10,6 +10,13 @@ module Alf
         end
         attr_reader :attributes, :on_empty
 
+        def on_set_operator(sexpr)
+          apply(builder.from_self(sexpr))
+        end
+        alias :on_union     :on_set_operator
+        alias :on_except    :on_set_operator
+        alias :on_intersect :on_set_operator
+
         def on_select_exp(sexpr)
           catch(:empty){ return super(sexpr) }
           send("select_#{on_empty}", sexpr)
