@@ -20,6 +20,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rake", "~> 10.1")
   s.add_development_dependency("rspec", "~> 2.14")
   s.add_dependency("sexpr", "~> 0.6.0")
-  s.add_dependency("alf-core", "0.16.2")
+  s.add_dependency("alf-core", "0.16.3")
 
 end
