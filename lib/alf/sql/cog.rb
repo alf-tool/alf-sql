@@ -10,6 +10,10 @@ module Alf
       attr_reader :sexpr
       alias :to_sexpr :sexpr
 
+      def flatten
+        Cog.new(expr, compiler, sexpr.flatten)
+      end
+
       def cog_orders
         [ sexpr.ordering ].compact
       end

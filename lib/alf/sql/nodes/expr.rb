@@ -60,6 +60,10 @@ module Alf
         end
       end
 
+      def flatten
+        Processor::Flatten.new(nil).call(self)
+      end
+
     private
 
       def find_child(kind = nil, &search)
